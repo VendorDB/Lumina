@@ -1,0 +1,12 @@
+{
+    "apps": [
+        {
+            "name": "VendorDB-Lumina",
+            "script": "build/index.js",
+            "env": {
+                "NODE_ENV": "production",
+                "PORT": 3080
+            }
+        }
+    ]
+}

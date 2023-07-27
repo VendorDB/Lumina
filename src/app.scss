@@ -1,0 +1,49 @@
+// Copyright (C) 2023 Marcus Huber (xenorio) <dev@xenorio.xyz>
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+// 
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+/* Import only what you need from Bulma */
+@import 'bulma/sass/utilities/_all';
+@import 'bulma/sass/base/_all';
+@import 'bulma/sass/elements/_all';
+//@import 'bulma/sass/form/_all';
+@import 'bulma/sass/components/_all';
+//@import 'bulma/sass/grid/_all';
+@import 'bulma/sass/helpers/_all';
+@import 'bulma/sass/layout/_all';
+
+html, body {
+    background-color: $black-ter;
+    color: $light;
+    margin: 0;
+    min-height: 100vh;
+}
+
+#app {
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 5rem;
+}
+
+strong {
+    color: $light;
+}
+
+.title, .subtitle, h1, h2, h3 {
+    color: $grey-lighter;
+}
+
+main {
+    padding: 3rem;
+}
