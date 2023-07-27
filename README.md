@@ -15,6 +15,12 @@ npm run dev
 npm run dev -- --open
 ```
 
+## Contributing
+
+Please base your contributions off of the "canary" branch!
+
+Main always contains the currently live version.
+
 ## Building
 
 To create a production version of Lumina:
