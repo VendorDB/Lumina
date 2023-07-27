@@ -33,7 +33,7 @@
 	</div>
 
 	<div class="faq-question">
-		<h2 class="subtitle">Will VendorDB be a free?</h2>
+		<h2 class="subtitle">Will VendorDB be free?</h2>
 		Yes! Both
 		<a href="https://audio-video.gnu.org/video/TEDxGE2014_Stallman05_LQ.webm" target="_blank"
 			>free as in freedom</a
