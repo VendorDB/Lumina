@@ -15,28 +15,31 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<script>
-	import '../app.scss';
-	import '@fortawesome/fontawesome-free/css/all.min.css';
-	import '@fontsource/port-lligat-slab';
+<script lang="ts">
+	import { page } from '$app/stores';
+	import { resendVerification } from '$lib/api';
 
-	import Navbar from '$lib/components/Navbar.svelte';
-	import Footer from '$lib/components/Footer.svelte';
+	const email = $page.url.searchParams.get('email') || '';
 
-	import { fetchMe } from '$lib/api';
-	import { user } from '$lib/stores';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		if (!$user) {
-			fetchMe().then((data) => {
-				user.set(data);
-			});
-		}
-	});
+	function resend() {
+		resendVerification(email)
+			.then(() => {
+				alert('Email Sent')
+			})
+			.catch(err => {
+				alert(err.message)
+			})
+	}
 </script>
 
-<Navbar />
+<main class="container">
+	<h1 class="title">Success!</h1>
+	<h3>We've just sent you an e-mail! Please click the link inside it to activate your account!</h3>
+	<button class="button is-primary" on:click={resend}>Resend Mail</button>
+</main>
 
-<slot />
-<Footer />
+<style>
+	button {
+		margin-top: 1rem;
+	}
+</style>

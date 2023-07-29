@@ -13,45 +13,6 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-/* Import only what you need from Bulma */
-@import 'bulma/sass/utilities/_all';
-@import 'bulma/sass/base/_all';
-@import 'bulma/sass/elements/_all';
-@import 'bulma/sass/form/_all';
-@import 'bulma/sass/components/_all';
-//@import 'bulma/sass/grid/_all';
-@import 'bulma/sass/helpers/_all';
-@import 'bulma/sass/layout/_all';
+import { writable } from "svelte/store";
 
-html, body {
-    background-color: $black-ter;
-    color: $light;
-    margin: 0;
-    min-height: 100vh;
-}
-
-#app {
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 5rem;
-}
-
-strong {
-    color: $light;
-}
-
-.title, .subtitle, h1, h2, h3 {
-    color: $grey-lighter;
-}
-
-main {
-    padding: 3rem;
-}
-
-.label {
-    color: $light;
-}
-
-.input::placeholder {
-    color: $black-ter;
-}
+export const user = writable(<User | null> null)

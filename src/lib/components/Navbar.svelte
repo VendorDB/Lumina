@@ -16,6 +16,9 @@
 -->
 
 <script lang="ts">
+
+	import {user} from '$lib/stores'
+
 	let navbarMenu: HTMLDivElement;
 	let navbarBurger: HTMLElement;
 
@@ -67,6 +70,39 @@
 					<a class="navbar-item" href="https://opencollective.com/research-fund/projects/vendordb" target="_blank"> <i class="fas fa-piggy-bank"/> &nbsp; Open Collective </a>
 				</div>
 			</div>
+		</div>
+
+		<div class="navbar-end">
+
+			{#if $user}
+				
+			<div class="navbar-item has-dropdown is-hoverable">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<a class="navbar-link"> {$user.username} </a>
+
+				<div class="navbar-dropdown is-right">
+					<a class="navbar-item" href="/settings"> <i class="fas fa-gear"/> &nbsp; User Settings </a>
+					{#if $user.admin}
+						<a class="navbar-item" href="/admin"> <i class="fas fa-screwdriver-wrench"/> &nbsp; Admin Dashboard </a>
+					{/if}
+				</div>
+			</div>
+
+			{:else}
+
+				<div class="navbar-item">
+					<div class="buttons">
+						<a class="button is-primary" href="/signup">
+							<strong>Sign Up</strong>
+						</a>
+						<a class="button is-light" href="/login">
+							Login
+						</a>
+					</div>
+				</div>
+
+			{/if}
+
 		</div>
 
 	</div>

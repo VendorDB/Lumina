@@ -13,45 +13,41 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-/* Import only what you need from Bulma */
-@import 'bulma/sass/utilities/_all';
-@import 'bulma/sass/base/_all';
-@import 'bulma/sass/elements/_all';
-@import 'bulma/sass/form/_all';
-@import 'bulma/sass/components/_all';
-//@import 'bulma/sass/grid/_all';
-@import 'bulma/sass/helpers/_all';
-@import 'bulma/sass/layout/_all';
+export {}
 
-html, body {
-    background-color: $black-ter;
-    color: $light;
-    margin: 0;
-    min-height: 100vh;
-}
+declare global {
+    interface User {
+        _id: string;
+        username: string;
+        admin: boolean;
+        email: string;
+    }
 
-#app {
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 5rem;
-}
+    interface SignupValidator {
+		[username: string]: {
+			[charAmount: string]: boolean,
+			[charTypes: string]: boolean,
+			[noSpace: string]: boolean
+		},
+		[email: string]: {
+			[valid: string]: boolean
+		},
+		[password: string]: {
+			[charAmount: string]: boolean,
+			[charTypes: string]: boolean,
+			[noSpace: string]: boolean
+			[match: string]: boolean
+		},
+        [dateOfBirth: string]: {
+            [valid: string]: boolean
+        }
+	}
 
-strong {
-    color: $light;
-}
+    interface SignupData {
+        username: string,
+        password: string,
+        email: string,
+        dateOfBirth: number,
+    }
 
-.title, .subtitle, h1, h2, h3 {
-    color: $grey-lighter;
-}
-
-main {
-    padding: 3rem;
-}
-
-.label {
-    color: $light;
-}
-
-.input::placeholder {
-    color: $black-ter;
 }
