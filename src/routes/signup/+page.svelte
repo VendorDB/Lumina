@@ -19,7 +19,6 @@
 	import { AgeFromDate } from 'age-calculator';
 	import { register } from '$lib/api';
 	import { goto } from '$app/navigation';
-	import {PUBLIC_CAPTCHA_URL} from '$env/static/public'
 
 	const mailRegex =
 		/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -333,7 +332,6 @@
 
 <svelte:head>
 	<title>VendorDB | Sign Up</title>
-	<script src="{PUBLIC_CAPTCHA_URL}" async defer />
 </svelte:head>
 
 <style>

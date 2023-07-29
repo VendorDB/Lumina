@@ -13,7 +13,9 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-const PREFIX = "http://localhost:3000/api/v1"
+import { PUBLIC_API_URL } from "$env/static/public"
+
+const PREFIX = PUBLIC_API_URL
 
 const headers = {
     'content-type': 'application/json'
