@@ -70,7 +70,7 @@
 			dateOfBirth: new Date(dateOfBirth).getUTCMilliseconds()
 		})
 			.then(() => {
-				goto('/signup/success');
+				goto('/signup/success?email=' + email);
 			})
 			.catch((err) => {
 				// TODO: Actual error display
@@ -335,10 +335,6 @@
 </svelte:head>
 
 <style>
-	.invisible {
-		display: none;
-	}
-
 	.is-danger {
 		cursor: not-allowed;
 	}
