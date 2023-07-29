@@ -18,6 +18,7 @@
 <script lang="ts">
 
 	import {user} from '$lib/stores'
+	import {logout as APILogout} from '$lib/api'
 
 	let navbarMenu: HTMLDivElement;
 	let navbarBurger: HTMLElement;
@@ -25,6 +26,11 @@
 	function toggle() {
 		navbarBurger.classList.toggle('is-active');
 		navbarMenu.classList.toggle('is-active');
+	}
+
+	function logout() {
+		APILogout()
+		user.set(null)
 	}
 
 </script>
@@ -85,6 +91,12 @@
 					{#if $user.admin}
 						<a class="navbar-item" href="/admin"> <i class="fas fa-screwdriver-wrench"/> &nbsp; Admin Dashboard </a>
 					{/if}
+
+					<hr class="navbar-divider">
+
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<!-- svelte-ignore a11y-no-static-element-interactions -->
+					<a class="navbar-item" id="logout" on:click={logout} on:keypress={logout}> <i class="fas fa-arrow-right-from-bracket"></i> &nbsp; Logout </a>
 				</div>
 			</div>
 
@@ -113,4 +125,9 @@
 		position: sticky;
 		top: 0;
 	}
+
+	#logout {
+		background-color: rgba(190, 14, 14, 0.479);
+	}
+
 </style>

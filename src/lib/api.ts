@@ -16,96 +16,111 @@
 const PREFIX = '/api/v1'
 
 const headers = {
-    'content-type': 'application/json'
+	'content-type': 'application/json'
 }
 
 export const fetchMe = async () => {
-    return new Promise<User>((resolve, reject) => {
-        fetch(PREFIX + '/user/me')
-            .then(async (res) => {
-                if (res.status == 200) {
-                    resolve(await res.json())
-                } else {
-                    reject(await res.json())
-                }
-            })
-    })
+	return new Promise<User>((resolve, reject) => {
+		fetch(PREFIX + '/user/me')
+			.then(async (res) => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
 }
 
 export const login = async (email: string, password: string) => {
-    return new Promise<{
-        status: string,
-        user: User
-    }>((resolve, reject) => {
-        fetch(PREFIX + '/user/login', {
-            method: 'POST',
-            headers,
-            body: JSON.stringify({
-                email,
-                password
-            })
-        })
-            .then(async (res) => {
-                if (res.status == 200) {
-                    resolve(await res.json())
-                } else {
-                    reject(await res.json())
-                }
-            })
-    })
+	return new Promise<{
+		status: string,
+		user: User
+	}>((resolve, reject) => {
+		fetch(PREFIX + '/user/login', {
+			method: 'POST',
+			headers,
+			body: JSON.stringify({
+				email,
+				password
+			})
+		})
+			.then(async (res) => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
 }
 
 export const register = async (data: SignupData) => {
-    return new Promise<void>((resolve, reject) => {
-        fetch(PREFIX + '/user/create', {
-            method: 'POST',
-            headers,
-            body: JSON.stringify(data)
-        })
-            .then(async res => {
-                if (res.status == 200) {
-                    resolve()
-                } else {
-                    reject(await res.json())
-                }
-            })
-    })
+	return new Promise<void>((resolve, reject) => {
+		fetch(PREFIX + '/user/create', {
+			method: 'POST',
+			headers,
+			body: JSON.stringify(data)
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve()
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
 }
 
 export const resendVerification = async (email: string) => {
 	return new Promise<void>((resolve, reject) => {
-        fetch(PREFIX + '/user/resend-verification', {
-            method: 'POST',
-            headers,
-            body: JSON.stringify({
+		fetch(PREFIX + '/user/resend-verification', {
+			method: 'POST',
+			headers,
+			body: JSON.stringify({
 				email
 			})
-        })
-            .then(async res => {
-                if (res.status == 200) {
-                    resolve()
-                } else {
-                    reject(await res.json())
-                }
-            })
-    })
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve()
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
 }
 
 export const verifyMail = async (code: string) => {
 	return new Promise<void>((resolve, reject) => {
-        fetch(PREFIX + '/user/verify', {
-            method: 'POST',
-            headers,
-            body: JSON.stringify({
+		fetch(PREFIX + '/user/verify', {
+			method: 'POST',
+			headers,
+			body: JSON.stringify({
 				code
 			})
-        })
-            .then(async res => {
-                if (res.status == 200) {
-                    resolve()
-                } else {
-                    reject(await res.json())
-                }
-            })
-    })
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve()
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
+export const logout = async () => {
+	return new Promise<void>((resolve, reject) => {
+		fetch(PREFIX + '/user/logout', {
+			method: 'POST'
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve()
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
 }
