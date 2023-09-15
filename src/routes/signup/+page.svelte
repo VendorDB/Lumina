@@ -59,9 +59,8 @@
 	};
 
 	function send() {
-
-		verify()
-		if(!areAllTrue(verificationValues)) return
+		verify();
+		if (!areAllTrue(verificationValues)) return;
 
 		register({
 			username,
@@ -133,7 +132,7 @@
 	}
 </script>
 
-<main class="container">
+<main class="container has-text-centered">
 	<h1 class="title">Sign Up</h1>
 	<h2 class="subtitle">Already have an account? <a href="/login">Log in</a>!</h2>
 

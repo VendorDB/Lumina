@@ -16,30 +16,23 @@
 -->
 
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { resendVerification } from '$lib/api';
-
-	const email = $page.url.searchParams.get('email') || '';
-
-	function resend() {
-		resendVerification(email)
-			.then(() => {
-				alert('Email Sent');
-			})
-			.catch((err) => {
-				alert(err.message);
-			});
-	}
+	export let stars = 0
 </script>
 
-<main class="container has-text-centered">
-	<h1 class="title">Success!</h1>
-	<h3>We've just sent you an e-mail! Please click the link inside it to activate your account!</h3>
-	<button class="button is-primary" on:click={resend}>Resend Mail</button>
-</main>
-
-<style>
-	button {
-		margin-top: 1rem;
-	}
-</style>
+<div class="stars">
+	{#each Array.from({ length: 5 }) as _, i}
+		{#if i < stars}
+			<span class="icon">
+				<i class="fas fa-star has-text-warning" />
+			</span>
+		{:else if i < stars + 0.5 && stars != 0}
+			<span class="icon">
+				<i class="fas fa-star-half has-text-warning" />
+			</span>
+		{:else}
+			<span class="icon">
+				<i class="far fa-star has-text-warning" />
+			</span>
+		{/if}
+	{/each}
+</div>

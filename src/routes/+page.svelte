@@ -18,7 +18,7 @@
 <script lang="ts">
 </script>
 
-<main class="has-text-centered">
+<main class="container has-text-centered">
 	<h1 class="title main-title">VendorDB</h1>
 	<h2>Providing independent information on Research Chemical vendors</h2>
 
@@ -29,11 +29,14 @@
 			<br /><br />
 			Currently, VendorDB is still very much Work-In-Progress. Actual site functionality is still being
 			worked on. To stay up to date and help shape VendorDB, join our
-			<a href="https://matrix.to/#/#vendordb:research-community.org" target="_blank">Matrix Space</a>!
-            <br><br>
-            For detailed information on what is planned, check out the <a href="/project-plan">Project Plan</a>
-            <br><br>
-            Everything we do is fully Free&Open-Source! Check out our <a href="https://github.com/VendorDB" target="_blank">GitHub page</a>
+			<a href="https://matrix.to/#/#vendordb:research-community.org" target="_blank">Matrix Space</a
+			>!
+			<br /><br />
+			For detailed information on what is planned, check out the
+			<a href="/project-plan">Project Plan</a>
+			<br /><br />
+			Everything we do is fully Free&Open-Source! Check out our
+			<a href="https://github.com/VendorDB" target="_blank">GitHub page</a>
 		</p>
 	</div>
 

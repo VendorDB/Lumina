@@ -15,31 +15,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<script lang="ts">
-	import { page } from '$app/stores';
-	import { resendVerification } from '$lib/api';
-
-	const email = $page.url.searchParams.get('email') || '';
-
-	function resend() {
-		resendVerification(email)
-			.then(() => {
-				alert('Email Sent');
-			})
-			.catch((err) => {
-				alert(err.message);
-			});
-	}
-</script>
-
-<main class="container has-text-centered">
-	<h1 class="title">Success!</h1>
-	<h3>We've just sent you an e-mail! Please click the link inside it to activate your account!</h3>
-	<button class="button is-primary" on:click={resend}>Resend Mail</button>
-</main>
-
-<style>
-	button {
-		margin-top: 1rem;
-	}
-</style>
+<div class="has-text-centered">
+	<h1 class="title">Loading...</h1>
+	<progress class="progress is-small is-primary" max="100">15%</progress>
+</div>

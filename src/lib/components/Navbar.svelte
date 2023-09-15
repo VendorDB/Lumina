@@ -19,6 +19,7 @@
 
 	import {user} from '$lib/stores'
 	import {logout as APILogout} from '$lib/api'
+	import Base64Image from './Base64Image.svelte';
 
 	let navbarMenu: HTMLDivElement;
 	let navbarBurger: HTMLElement;
@@ -60,11 +61,9 @@
 
 	<div class="navbar-menu" bind:this={navbarMenu}>
 		<div class="navbar-start">
-			<a class="navbar-item" href="/"> Home </a>
+			<a class="navbar-item" href="/vendors"> Vendors </a>
 
 			<a class="navbar-item" href="/faq"> FAQ </a>
-
-			<a class="navbar-item" href="/project-plan">Project Plan</a>
 
 			<div class="navbar-item has-dropdown is-hoverable">
 				<!-- svelte-ignore a11y-missing-attribute -->
@@ -84,12 +83,21 @@
 				
 			<div class="navbar-item has-dropdown is-hoverable">
 				<!-- svelte-ignore a11y-missing-attribute -->
-				<a class="navbar-link"> {$user.username} </a>
+				<a class="navbar-link"> 
+					<span class="profile-picture"><Base64Image imageData={$user.profile_picture} alt="Profile Picture" width="25" /></span>
+					{$user.username} 
+				</a>
 
 				<div class="navbar-dropdown is-right">
-					<a class="navbar-item" href="/settings"> <i class="fas fa-gear"/> &nbsp; User Settings </a>
+					<a class="navbar-item" href="/dashboard/user"> <i class="fas fa-gear"/> &nbsp; User Dashboard </a>
+
+					{#if $user.moderator || $user.admin}
+						<hr class="navbar-divider">
+						<a class="navbar-item" href="/dashboard/moderation"> <i class="fas fa-gavel"/> &nbsp; Moderator Dashboard </a>
+					{/if}
+
 					{#if $user.admin}
-						<a class="navbar-item" href="/admin"> <i class="fas fa-screwdriver-wrench"/> &nbsp; Admin Dashboard </a>
+						<a class="navbar-item" href="/dashboard/admin"> <i class="fas fa-screwdriver-wrench"/> &nbsp; Admin Dashboard </a>
 					{/if}
 
 					<hr class="navbar-divider">
@@ -128,6 +136,10 @@
 
 	#logout {
 		background-color: rgba(190, 14, 14, 0.479);
+	}
+
+	.profile-picture {
+		margin-right: 0.5rem;
 	}
 
 </style>

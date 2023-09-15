@@ -16,30 +16,10 @@
 -->
 
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { resendVerification } from '$lib/api';
+	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
 
-	const email = $page.url.searchParams.get('email') || '';
-
-	function resend() {
-		resendVerification(email)
-			.then(() => {
-				alert('Email Sent');
-			})
-			.catch((err) => {
-				alert(err.message);
-			});
-	}
+	onMount(() => {
+		goto('./user/profile')
+	})
 </script>
-
-<main class="container has-text-centered">
-	<h1 class="title">Success!</h1>
-	<h3>We've just sent you an e-mail! Please click the link inside it to activate your account!</h3>
-	<button class="button is-primary" on:click={resend}>Resend Mail</button>
-</main>
-
-<style>
-	button {
-		margin-top: 1rem;
-	}
-</style>

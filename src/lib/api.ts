@@ -124,3 +124,75 @@ export const logout = async () => {
 			})
 	})
 }
+
+export const getVendors = async (filter?: VendorFilter, page?: number, limit?: number) => {
+	return new Promise<{
+		vendors: Vendor[],
+		page: number,
+		limit: number,
+		totalPages: number,
+		totalCount: number
+	}>((resolve, reject) => {
+		fetch(PREFIX + `/vendor/search?page=${page || 1}&limit=${limit || 25}`, {
+			method: 'POST',
+			headers,
+			body: JSON.stringify(filter || {})
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
+export const getVendor = async (id: string) => {
+	return new Promise<Vendor>((resolve, reject) => {
+		fetch(PREFIX + `/vendor/${id}`, {
+			method: 'GET',
+			headers
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
+export const getReviews = async (id: string, page: number, limit: number) => {
+	return new Promise<Review[]>((resolve, reject) => {
+		fetch(PREFIX + `/vendor/${id}/reviews?page=${page}&limit=${limit}`, {
+			method: 'GET',
+			headers
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
+export const updateUser = async (update: UserUpdate) => {
+	return new Promise<void>((resolve, reject) => {
+		fetch(PREFIX + '/user/update', {
+			method: 'POST',
+			headers,
+			body: JSON.stringify(update)
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}

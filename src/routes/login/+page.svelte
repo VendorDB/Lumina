@@ -35,7 +35,7 @@
 	}
 </script>
 
-<main class="container">
+<main class="container has-text-centered">
 	<h1 class="title">Login</h1>
 	<h2 class="subtitle">Don't have an account yet? <a href="/signup">Sign up</a>!</h2>
 

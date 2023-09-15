@@ -14,8 +14,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<main class="container">
+<main class="container has-text-centered">
 	<h1 class="title is-size-3">Privacy Policy</h1>
 
 	<!-- Section 1: Introduction -->
@@ -204,8 +203,6 @@
 			VendorDB after policy updates implies acceptance of the revised terms.
 		</p>
 	</section>
-
-	<!-- Add a footer or any additional elements here if needed -->
 </main>
 
 <svelte:head>

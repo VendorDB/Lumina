@@ -39,4 +39,5 @@
 <Navbar />
 
 <slot />
+
 <Footer />

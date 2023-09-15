@@ -33,7 +33,7 @@
 		});
 </script>
 
-<main class="container">
+<main class="container has-text-centered">
 	{#if verified}
 		<h1 class="title">Success!</h1>
 		<h3>You have successfully activated your account!</h3>
@@ -43,7 +43,6 @@
 				goto('/login');
 			}}>Login</button
 		>
-
 	{:else}
 		<div class="has-text-centered">
 			<h1 class="title">Loading...</h1>

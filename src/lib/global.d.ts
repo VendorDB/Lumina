@@ -20,7 +20,10 @@ declare global {
         _id: string;
         username: string;
         admin: boolean;
+		moderator: boolean;
         email: string;
+		profile_picture: string;
+		about: string;
     }
 
     interface SignupValidator {
@@ -49,5 +52,33 @@ declare global {
         email: string,
         dateOfBirth: number,
     }
+
+	interface VendorFilter {
+		name?: string;
+		description?: string;
+		minAverageRating?: number;
+		shippingTo?: string;
+	}
+
+	interface Vendor {
+		_id: string;
+		name: string;
+		description: string;
+		stars: number;
+		starsAverage: number;
+		logo: string;
+	}
+
+	interface Review {
+		author: User;
+		message: string;
+		stars: number;
+	}
+
+	interface UserUpdate {
+		profile_picture?: string;
+		username?: string;
+		about?: string;
+	}
 
 }

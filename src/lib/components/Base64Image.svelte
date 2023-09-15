@@ -16,30 +16,18 @@
 -->
 
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { resendVerification } from '$lib/api';
-
-	const email = $page.url.searchParams.get('email') || '';
-
-	function resend() {
-		resendVerification(email)
-			.then(() => {
-				alert('Email Sent');
-			})
-			.catch((err) => {
-				alert(err.message);
-			});
-	}
+	export let imageData: string;
+	export let alt: string;
+	export let width: string | null = null;
+	export let height: string | null = null;
+	export let style: string | null = null;
 </script>
 
-<main class="container has-text-centered">
-	<h1 class="title">Success!</h1>
-	<h3>We've just sent you an e-mail! Please click the link inside it to activate your account!</h3>
-	<button class="button is-primary" on:click={resend}>Resend Mail</button>
-</main>
+<img src={imageData || '/assets/logo-compact-500x500.png'} alt={alt} {width} {height} {style} />
 
 <style>
-	button {
-		margin-top: 1rem;
+	img {
+		max-width: 100%;
 	}
 </style>
+

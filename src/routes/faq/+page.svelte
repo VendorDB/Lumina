@@ -14,8 +14,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<main class="container">
+<main class="container has-text-centered">
 	<h1 class="title">Frequently Asked Questions</h1>
 
 	<div class="faq-question">
