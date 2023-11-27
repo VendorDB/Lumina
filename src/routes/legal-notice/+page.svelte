@@ -29,7 +29,7 @@
         <br>
 		<p>
 			<strong>Contact:</strong><br />
-			Phone: (+49) 160 897 8834<br />
+			Phone: +49 172 907 5536<br />
 			Email: hi@vendordb.info
 		</p>
         <br>
