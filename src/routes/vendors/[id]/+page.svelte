@@ -123,18 +123,18 @@
 	}
 
 	async function sendReport() {
-		await reportVendor(vendor._id, reportReason, reportMessage)
-		reportSentModal.open()
+		await reportVendor(vendor._id, reportReason, reportMessage);
+		reportSentModal.open();
 	}
 </script>
 
-<div id="vendor-disclaimer">
-	<strong>Disclaimer</strong> <br />
-	VendorDB is in no way affiliated with {vendor ? vendor.name : 'this vendor'}
-</div>
-
 <main class="container has-text-centered">
 	{#if vendor}
+		<div id="vendor-disclaimer">
+			<strong>Disclaimer</strong> <br />
+			VendorDB is in no way affiliated with {vendor.name}
+		</div>
+
 		<div id="header" class="section">
 			<Base64Image imageData={vendor.logo} alt="Logo" style="width: 10rem" />
 			<h1 class="title">{vendor.name}</h1>
@@ -234,11 +234,16 @@
 	</div>
 </Modal>
 
-<Modal title="Report Vendor" bind:this={reportModal} buttons={['cancel', 'confirm']} on:buttonClick={event => {
-	if(event.detail == 'confirm'){
-		sendReport()
-	}
-}}>
+<Modal
+	title="Report Vendor"
+	bind:this={reportModal}
+	buttons={['cancel', 'confirm']}
+	on:buttonClick={(event) => {
+		if (event.detail == 'confirm') {
+			sendReport();
+		}
+	}}
+>
 	<div class="field">
 		<label for="report-reason">Reason</label>
 		<div class="control">
@@ -272,10 +277,6 @@
 
 <style>
 	#vendor-disclaimer {
-		position: absolute;
-		left: 50%;
-		text-align: center;
-		transform: translateX(-50%) translateY(1rem);
 		border-radius: 25px;
 		padding: 1rem;
 	}
