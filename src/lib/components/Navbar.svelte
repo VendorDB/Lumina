@@ -16,12 +16,24 @@
 -->
 
 <script lang="ts">
+
+	import {user} from '$lib/stores'
+	import {logout as APILogout} from '$api/user'
+	import Base64Image from './Base64Image.svelte';
+	import { goto } from '$app/navigation';
+
 	let navbarMenu: HTMLDivElement;
 	let navbarBurger: HTMLElement;
 
 	function toggle() {
 		navbarBurger.classList.toggle('is-active');
 		navbarMenu.classList.toggle('is-active');
+	}
+
+	function logout() {
+		APILogout()
+		user.set(null)
+		goto('/')
 	}
 
 </script>
@@ -51,11 +63,9 @@
 
 	<div class="navbar-menu" bind:this={navbarMenu}>
 		<div class="navbar-start">
-			<a class="navbar-item" href="/"> Home </a>
+			<a class="navbar-item" href="/vendors"> Vendors </a>
 
 			<a class="navbar-item" href="/faq"> FAQ </a>
-
-			<a class="navbar-item" href="/project-plan">Project Plan</a>
 
 			<div class="navbar-item has-dropdown is-hoverable">
 				<!-- svelte-ignore a11y-missing-attribute -->
@@ -69,6 +79,54 @@
 			</div>
 		</div>
 
+		<div class="navbar-end">
+
+			{#if $user}
+				
+			<div class="navbar-item has-dropdown is-hoverable">
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<a class="navbar-link"> 
+					<span class="profile-picture"><Base64Image imageData={$user.profile_picture} alt="Profile Picture" width="25" /></span>
+					{$user.username} 
+				</a>
+
+				<div class="navbar-dropdown is-right">
+					<a class="navbar-item" href="/dashboard/user"> <i class="fas fa-gear"/> &nbsp; User Dashboard </a>
+
+					{#if $user.perms > 0}
+						<hr class="navbar-divider">
+						<a class="navbar-item" href="/dashboard/moderator"> <i class="fas fa-gavel"/> &nbsp; Moderator Dashboard </a>
+					{/if}
+
+					{#if $user.perms > 1}
+						<a class="navbar-item" href="/dashboard/admin"> <i class="fas fa-screwdriver-wrench"/> &nbsp; Admin Dashboard </a>
+					{/if}
+
+					<hr class="navbar-divider">
+
+					<!-- svelte-ignore a11y-missing-attribute -->
+					<!-- svelte-ignore a11y-no-static-element-interactions -->
+					<a class="navbar-item" id="logout" on:click={logout} on:keypress={logout}> <i class="fas fa-arrow-right-from-bracket"></i> &nbsp; Logout </a>
+				</div>
+			</div>
+
+			{:else}
+
+				<div class="navbar-item">
+					<div class="buttons">
+						<a class="button is-primary" href="/signup">
+							<strong>Sign Up</strong>
+						</a>
+						<a class="button is-light" href="/login">
+							Login
+						</a>
+					</div>
+				</div>
+
+			{/if}
+
+		</div>
+
 	</div>
 </nav>
 
@@ -77,4 +135,13 @@
 		position: sticky;
 		top: 0;
 	}
+
+	#logout {
+		background-color: rgba(190, 14, 14, 0.479);
+	}
+
+	.profile-picture {
+		margin-right: 0.5rem;
+	}
+
 </style>

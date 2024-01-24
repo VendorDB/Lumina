@@ -13,11 +13,10 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-/* Import only what you need from Bulma */
 @import 'bulma/sass/utilities/_all';
 @import 'bulma/sass/base/_all';
 @import 'bulma/sass/elements/_all';
-//@import 'bulma/sass/form/_all';
+@import 'bulma/sass/form/_all';
 @import 'bulma/sass/components/_all';
 //@import 'bulma/sass/grid/_all';
 @import 'bulma/sass/helpers/_all';
@@ -28,6 +27,29 @@ html, body {
     color: $light;
     margin: 0;
     min-height: 100vh;
+}
+
+a:hover {
+	color: cyan;
+}
+
+#noscript-message-wrapper {
+	z-index: 1000;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	background-color: $black-ter;
+}
+
+#noscript-message {
+	z-index: inherit;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	text-align: center;
 }
 
 #app {
@@ -46,4 +68,82 @@ strong {
 
 main {
     padding: 3rem;
+}
+
+.label {
+    color: $light;
+}
+
+.input::placeholder {
+    color: $black-ter;
+}
+
+.invisible {
+	display: none;
+}
+
+.profile-picture img {
+	border-radius: 25px;
+}
+
+table {
+	display: inline-block;
+}
+
+.request {
+	background-color: $grey-darker;
+}
+
+.report {
+	background-color: $grey-darker;
+}
+
+.review {
+	background-color: $grey-darker;
+}
+
+.review-card-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 1rem;
+}
+
+.review-input {
+	background-color: $grey-darker;
+	border-radius: 25px;
+	padding: 1rem;
+}
+
+.review-content textarea {
+	background-color: $grey-darker;
+	color: $light;
+	border: none;
+}
+
+.modal-card-head,
+.modal-card-title, 
+.modal-card-body,
+.modal-card-foot {
+	background-color: $grey-darker;
+	color: $light;
+	text-align: center;
+}
+
+.card-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.faq-question {
+	background-color: $grey-darker;
+}
+
+.security-settings-section {
+	background-color: $grey-darker;
+}
+
+#vendor-disclaimer {
+	background-color: $grey-darker;
 }

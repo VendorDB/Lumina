@@ -18,22 +18,20 @@
 <script lang="ts">
 </script>
 
-<main class="has-text-centered">
+<main class="container has-text-centered">
 	<h1 class="title main-title">VendorDB</h1>
 	<h2>Providing independent information on Research Chemical vendors</h2>
 
 	<div class="section">
 		<h1 class="title">Who We Are</h1>
 		<p>
-			VendorDB is an independent information and review platform on Research Chemical vendors.
+			The goal of VendorDB is to provide you with all the information you need for safely shopping in the space of Research Chemicals.
 			<br /><br />
-			Currently, VendorDB is still very much Work-In-Progress. Actual site functionality is still being
-			worked on. To stay up to date and help shape VendorDB, join our
-			<a href="https://matrix.to/#/#vendordb:research-community.org" target="_blank">Matrix Space</a>!
-            <br><br>
-            For detailed information on what is planned, check out the <a href="/project-plan">Project Plan</a>
-            <br><br>
-            Everything we do is fully Free&Open-Source! Check out our <a href="https://github.com/VendorDB" target="_blank">GitHub page</a>
+			We will always stay completely independent. We provide information to you, not advertisement to vendors.
+			<br><br>
+			Currently, the site is still under heavy development. Expect a constant influx of new stuff!
+			<br><br>
+			Additionally, the entirety of VendorDB is <a href="https://github.com/VendorDB" target="_blank" rel="noreferrer">Free&Open-Source</a>!
 		</p>
 	</div>
 
@@ -41,14 +39,13 @@
 		<h1 class="title">We live through your donations!</h1>
 		<p>
 			The operation of VendorDB is entirely donation-based. There are no ads, fees, premium
-			memberships, or anything else like that. <br />
+			memberships, or similar. <br />
 			If you like what we do and want to help keep VendorDB up and running, feel free to contribute on
-			our
 			<a
 				href="https://opencollective.com/research-fund/projects/vendordb"
 				target="_blank"
 				rel="noopener noreferrer">Open Collective</a
-			> page!
+			>!
 		</p>
 	</div>
 </main>

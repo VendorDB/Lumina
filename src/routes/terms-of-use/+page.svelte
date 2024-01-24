@@ -14,8 +14,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<main class="container">
+<main class="container has-text-centered">
 	<h1 class="title">Terms of Use</h1>
 
 	<section class="section">
@@ -192,7 +191,6 @@
 		</div>
 	</section>
 </main>
-
 
 <svelte:head>
 	<title>VendorDB | Terms of Use</title>

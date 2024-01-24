@@ -42,4 +42,5 @@
     .footer-brand {
         font-family: 'Port Lligat Slab', serif;
     }
+
 </style>

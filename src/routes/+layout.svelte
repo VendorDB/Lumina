@@ -22,9 +22,22 @@
 
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+
+	import { fetchMe } from '$api/user';
+	import { user } from '$lib/stores';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		if (!$user) {
+			fetchMe().then((data) => {
+				user.set(data);
+			});
+		}
+	});
 </script>
 
 <Navbar />
 
 <slot />
+
 <Footer />

@@ -14,30 +14,29 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<main class="container">
+<main class="container has-text-centered">
 	<h1 class="title">Legal Notice</h1>
 	<div class="section">
 		<p>This website is operated by Xenorio - Management.</p>
-        <br>
+		<br />
 		<p>
 			<strong>Address:</strong><br />
 			Schlesierstraße 3<br />
 			64546 Mörfelden-Walldorf<br />
 			Germany
 		</p>
-        <br>
+		<br />
 		<p>
 			<strong>Contact:</strong><br />
-			Phone: +49 172 907 5536<br />
+			Phone: (+49) 172 907 5536<br />
 			Email: hi@vendordb.info
 		</p>
-        <br>
+		<br />
 		<p>
 			<strong>Representative:</strong><br />
 			Marcus Huber
 		</p>
-        <br>
+		<br />
 		<p>
 			This website is subject to the <a href="/terms-of-use">Terms of Use</a>. By using this
 			website, you agree to the Terms of Use.

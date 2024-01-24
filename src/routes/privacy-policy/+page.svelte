@@ -14,8 +14,7 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-
-<main class="container">
+<main class="container has-text-centered">
 	<h1 class="title is-size-3">Privacy Policy</h1>
 
 	<!-- Section 1: Introduction -->
@@ -149,13 +148,12 @@
 		<p>As a user of VendorDB, you have the following data subject rights:</p>
 		<ul>
 			<li>
-				Right to access: You can view all data collected about you by logging in and clicking a
-				button.
+				Right to access: You can view all data collected about you in your <a href="/dashboard/user/account-data">Dashboard</a> after logging in.
 			</li>
 			<li>Right to rectification: You can edit your data in user settings.</li>
 			<li>
-				Right to erasure: You can delete your account and all associated data at any time by logging
-				in and clicking a button.
+				Right to erasure: You can delete your account and all associated data at any time in your <a href="/dashboard/user/security">Dashboard</a> after logging
+				in.
 			</li>
 			<li>
 				Right to restriction of processing: If you do not consent to data processing, you can delete
@@ -204,8 +202,6 @@
 			VendorDB after policy updates implies acceptance of the revised terms.
 		</p>
 	</section>
-
-	<!-- Add a footer or any additional elements here if needed -->
 </main>
 
 <svelte:head>
