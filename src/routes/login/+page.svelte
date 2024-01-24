@@ -102,3 +102,7 @@
 		/>
 	</form>
 </Modal>
+
+<svelte:head>
+	<title>VendorDB | Login</title>
+</svelte:head>

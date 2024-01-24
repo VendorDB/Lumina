@@ -52,3 +52,7 @@
 		<button class="button is-primary" type="submit">Submit</button>
 	</form>
 </main>
+
+<svelte:head>
+	<title>VendorDB | Request Vendor</title>
+</svelte:head>

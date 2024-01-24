@@ -101,7 +101,7 @@ tabindex="0"
 
 <svelte:head>
 	<title>
-		VendorDB | Dashboard
+		VendorDB | Moderator Dashboard
 	</title>
 </svelte:head>
 

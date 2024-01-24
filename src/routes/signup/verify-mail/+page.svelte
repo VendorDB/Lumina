@@ -54,6 +54,10 @@
 	{/if}
 </main>
 
+<svelte:head>
+	<title>VendorDB | Email Verified</title>
+</svelte:head>
+
 <style>
 	button {
 		margin-top: 1rem;
