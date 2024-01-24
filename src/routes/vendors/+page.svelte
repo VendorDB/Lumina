@@ -82,3 +82,7 @@
 		</h2>
 	{/if}
 </main>
+
+<svelte:head>
+	<title>VendorDB | Vendors</title>
+</svelte:head>
