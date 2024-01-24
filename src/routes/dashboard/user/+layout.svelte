@@ -28,7 +28,7 @@
 
 	function navigate(page: string) {
 		activePage = page; // Set the active page
-		goto('./' + page);
+		goto('/dashboard/user/' + page);
 	}
 </script>
 
@@ -83,6 +83,21 @@ tabindex="0"
 				>
 					Security
 				</a>
+
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<a
+					class={activePage === 'account-data' ? 'is-active' : ''}
+					role="button"
+					tabindex="0"
+					on:click={() => navigate('account-data')}
+					on:keydown={(e) => {
+						if (e.key === 'Enter') {
+							navigate('account-data');
+						}
+					}}
+				>
+					Account Data
+				</a>
 			</li>
 		</ul>
 	</aside>
@@ -106,10 +121,11 @@ tabindex="0"
 
 	.menu {
 		width: 10rem;
+		position: fixed;
 	}
 
 	.dashboard-content {
-		margin-left: 1rem;
+		margin-left: 10rem;
 		flex-grow: 1;
 	}
 

@@ -20,6 +20,6 @@
 	import { onMount } from "svelte";
 
 	onMount(() => {
-		goto('./user/profile')
+		goto('/dashboard/user/profile')
 	})
 </script>

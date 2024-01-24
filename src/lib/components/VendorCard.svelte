@@ -18,17 +18,25 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import StarsDisplay from '$lib/components/StarsDisplay.svelte';
+	import { createEventDispatcher } from 'svelte';
 	import Base64Image from './Base64Image.svelte';
 
 	export let vendor: Vendor;
+	export let admin: boolean = false;
+
+	const dispatch = createEventDispatcher();
 </script>
 
 <div
 	class="card has-background-dark"
 	role="button"
 	tabindex="0"
-	on:click={() => goto(`/vendors/${vendor._id}`)}
-	on:keypress={() => goto(`/vendors/${vendor._id}`)}
+	on:click={() => {
+		if (!admin) goto(`/vendors/${vendor._id}`);
+	}}
+	on:keypress={() => {
+		if (!admin) goto(`/vendors/${vendor._id}`);
+	}}
 >
 	<div class="card-image">
 		<figure class="image is-4by3">
@@ -38,11 +46,26 @@
 	<div class="card-content">
 		<p class="card-title has-text-white">{vendor.name}</p>
 
-		<StarsDisplay stars={vendor.starsAverage} />
+		<StarsDisplay stars={vendor.stars / vendor.reviewAmount} />
 
 		<div class="content has-text-white">
 			{vendor.description}
 		</div>
+
+		{#if admin}
+			<button
+				class="button is-info"
+				on:click={() => {
+					dispatch('adminAction', {type: 'edit', vendor});
+				}}><i class="fa-solid fa-pen" /></button
+			>
+			<button
+				class="button is-danger"
+				on:click={() => {
+					dispatch('adminAction', {type: 'delete', vendor});
+				}}><i class="fa-solid fa-trash" /></button
+			>
+		{/if}
 	</div>
 </div>
 

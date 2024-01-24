@@ -17,34 +17,16 @@
 
 <script lang="ts">
 	import { user } from '$lib/stores';
-	import { updateUser, fetchMe } from '$lib/api';
-	import Base64Image from '$lib/components/Base64Image.svelte';
+	import { updateUser, fetchMe, deleteAccount } from '$api/user';
+	import ImagePicker from '$lib/components/ImagePicker.svelte';
+	import Modal from '$lib/components/Modal.svelte';
+	import { goto } from '$app/navigation';
 
 	let username = $user?.username;
-	let profile_picture: string | undefined;
+	let profile_picture = $user?.profile_picture;
 	let about = $user?.about;
 
-	function openFilePicker() {
-		const input = document.createElement('input');
-		input.type = 'file';
-		input.accept = 'image/jpeg,image/png,image/gif,image/bmp';
-		input.addEventListener('change', handleFileSelection);
-		input.click();
-	}
-
-	function handleFileSelection(event: Event) {
-		const input = event.target as HTMLInputElement;
-		if (!input.files) return;
-		const file = input.files[0];
-		if (file) {
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				if (!e.target) return;
-				profile_picture = e.target.result as string;
-			};
-			reader.readAsDataURL(file);
-		}
-	}
+	let deleteConfirmModal: Modal;
 
 	function submit() {
 		updateUser({
@@ -73,20 +55,12 @@
 		<form on:submit={submit}>
 			<div class="field">
 				<label for="profile-picture" class="label">Profile Picture</label>
-				<div class="profile-picture-container">
-					<Base64Image
-						imageData={profile_picture || $user.profile_picture}
-						alt="Profile Picture"
-						style="width: 5rem"
-					/>
-					<span
-						class="edit-icon"
-						role="button"
-						tabindex="0"
-						on:click={openFilePicker}
-						on:keypress={openFilePicker}>✏️</span
-					>
-				</div>
+				<ImagePicker
+					on:pick={(event) => {
+						profile_picture = event.detail;
+					}}
+					imageData={$user.profile_picture}
+				/>
 			</div>
 
 			<div class="field">
@@ -118,28 +92,27 @@
 
 			<button class="button is-primary" type="submit"> Save </button>
 		</form>
+
+		<hr />
+
+		<button class="button is-danger" on:click={() => deleteConfirmModal.open()}
+			><i class="fa-solid fa-trash-can" />&nbsp;Delete Account</button
+		>
 	{/if}
 </main>
 
-<style>
-	.profile-picture-container {
-		position: relative;
-		display: inline-block;
-	}
-
-	.edit-icon {
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		background-color: #fff;
-		border: 1px solid #ccc;
-		border-radius: 50%;
-		padding: 4px;
-		cursor: pointer;
-	}
-
-	/* Add some styling for the hover effect */
-	.profile-picture-container:hover .edit-icon {
-		background-color: grey;
-	}
-</style>
+<Modal
+	title="Confirm Deletion"
+	bind:this={deleteConfirmModal}
+	buttons={['cancel', 'confirm']}
+	on:buttonClick={(event) => {
+		if (event.detail == 'confirm') {
+			deleteAccount();
+			user.set(null);
+			goto('/');
+		}
+	}}
+>
+	Do you really want to delete your account? <br /><br />
+	This will <strong>irrecoverably</strong> get rid of all your account data and reviews!
+</Modal>

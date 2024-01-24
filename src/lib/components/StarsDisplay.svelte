@@ -21,11 +21,11 @@
 
 <div class="stars">
 	{#each Array.from({ length: 5 }) as _, i}
-		{#if i < stars}
+		{#if i < Math.floor(stars)}
 			<span class="icon">
 				<i class="fas fa-star has-text-warning" />
 			</span>
-		{:else if i < stars + 0.5 && stars != 0}
+		{:else if i + 0.5 <= stars && stars != 0}
 			<span class="icon">
 				<i class="fas fa-star-half has-text-warning" />
 			</span>

@@ -17,7 +17,7 @@
 
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { resendVerification } from '$lib/api';
+	import { resendVerification } from '$api/user';
 
 	const email = $page.url.searchParams.get('email') || '';
 

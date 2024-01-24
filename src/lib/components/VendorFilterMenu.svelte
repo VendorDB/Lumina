@@ -18,12 +18,13 @@
 	import { createEventDispatcher } from 'svelte';
 
 	let isFilterVisible = false;
-	let name = '';
+	let name: string | undefined;
 	let minAverageRating = 0;
 
 	const dispatch = createEventDispatcher();
 
 	function applyFilters() {
+		if(name && name.trim() == '') name = undefined
 		const filterData = {
 			name,
 			description: name,

@@ -17,40 +17,61 @@
 <main class="container has-text-centered">
 	<h1 class="title">Frequently Asked Questions</h1>
 
-	<div class="faq-question">
-		<h2 class="subtitle">What is VendorDB, and what will it offer in the future?</h2>
-		VendorDB is a platform for independent information on vendors of Research Chemicals, but is still
-		under heavy development.<br />
-		You can see what's planned for the future in our <a href="/project-plan">Project Plan</a>
+	<div class="faq-question" id="about">
+		<h2 class="subtitle">What is VendorDB?</h2>
+		VendorDB is a platform for independent information on vendors of Research Chemicals, which is still
+		under heavy development.
 	</div>
 
-	<div class="faq-question">
-		<h2 class="subtitle">When will VendorDB be fully functional?</h2>
-		It'll be ready when it's ready. This essentially is a hobby project run by one singular person, there
-		are no deadlines or time constraints. However, you can speed development up by helping out on
-		<a href="https://github.com/VendorDB" target="_blank">GitHub</a>
-	</div>
-
-	<div class="faq-question">
-		<h2 class="subtitle">Will VendorDB be free?</h2>
+	<div class="faq-question" id="free">
+		<h2 class="subtitle">Is VendorDB free?</h2>
 		Yes! Both
 		<a href="https://audio-video.gnu.org/video/TEDxGE2014_Stallman05_LQ.webm" target="_blank"
 			>free as in freedom</a
 		>, and free as in beer! VendorDB is purely based on donations. There are no fees, paywalls,
-		locked content, premium memberships, and also no ads!
+		locked content, premium memberships, and also no ads! <br />
+		The source code is available on <a href="https://github.com/VendorDB" target="_blank">GitHub</a>
 	</div>
 
-	<div class="faq-question">
+	<div class="faq-question" id="updates">
 		<h2 class="subtitle">How can I stay updated on the progress of VendorDB's development?</h2>
 		By joining the
 		<a href="https://matrix.to/#/#vendordb:research-community.org" target="_blank">Matrix Space</a>
 		or checking out our <a href="https://github.com/VendorDB" target="_blank">GitHub Page</a>
 	</div>
 
-	<div class="faq-question">
+	<div class="faq-question" id="multiple-languages">
 		<h2 class="subtitle">Will VendorDB support multiple languages?</h2>
-		Currently, this is not planned. Once the site is fully functional, we may look into it. If you're
-		a translator, feel free to reach out!
+		Currently, this is not planned. However, we may look into it in the future. If you're a translator,
+		feel free to reach out!
+	</div>
+
+	<div class="faq-question" id="review-held">
+		<h2 class="subtitle">Why is my review being held?</h2>
+		VendorDB uses a reputation system to combat spam, instead of privacy-risking and annoying captcha
+		services. When you post your first review, a moderator will need to manually check whether it's spam
+		before it goes online. After the first one, you've got a chance for your review to go online without
+		prior approval. Every time a moderator approves one of your reviews, this chance is increased (up
+		to 75%), and every denied or deleted one decreases it.<br /><br />
+		Staff reserves the right to manually modify your reputation at any point, in any direction. You may
+		also be reputation-locked, which prevents you from gaining reputation. <br /><br />
+		Formula for the nerds (JavaScript): <br />
+		isHeld = user.reputation > 0 ? Math.random() &gt;= Math.min(user.reputation / 100, 0.75) : true
+	</div>
+
+	<div class="faq-question" id="review-edit">
+		<h2 class="subtitle">Can reviews be edited?</h2>
+		No. Neither by us, you, or any vendors. Every review is completely set in stone once it is submitted.
+		However, reviews may be deleted&nbsp;<strong>only by VendorDB staff</strong> if they are determinded
+		to be spam or otherwise malicious. Reviews are never deleted to impact ratings, for any reason, including
+		money.
+	</div>
+
+	<div class="faq-question" id="review-delete">
+		<h2 class="subtitle">Can I delete my reviews?</h2>
+		Yes, but also no. Currently, the only way for you to delete reviews is to delete your entire account
+		(which deletes all your reviews as well). However, we're still not sure if we will be keeping it
+		this way.
 	</div>
 </main>
 
@@ -61,6 +82,12 @@
 <style>
 	h2 {
 		font-weight: bolder;
+		margin-bottom: 1rem;
+	}
+
+	.faq-question {
+		padding: 1rem;
+		border-radius: 25px;
 	}
 
 	.faq-question,

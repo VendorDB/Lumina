@@ -23,7 +23,7 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
-	import { fetchMe } from '$lib/api';
+	import { fetchMe } from '$api/user';
 	import { user } from '$lib/stores';
 	import { onMount } from 'svelte';
 

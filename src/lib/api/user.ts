@@ -1,4 +1,4 @@
-// Copyright (C) 2023 Marcus Huber (xenorio) <dev@xenorio.xyz>
+// Copyright (C) 2024 Marcus Huber (xenorio) <dev@xenorio.xyz>
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -13,38 +13,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-const PREFIX = '/api/v1'
-
-const headers = {
-	'content-type': 'application/json'
-}
+import { PREFIX, headers } from "./vars"
 
 export const fetchMe = async () => {
 	return new Promise<User>((resolve, reject) => {
 		fetch(PREFIX + '/user/me')
-			.then(async (res) => {
-				if (res.status == 200) {
-					resolve(await res.json())
-				} else {
-					reject(await res.json())
-				}
-			})
-	})
-}
-
-export const login = async (email: string, password: string) => {
-	return new Promise<{
-		status: string,
-		user: User
-	}>((resolve, reject) => {
-		fetch(PREFIX + '/user/login', {
-			method: 'POST',
-			headers,
-			body: JSON.stringify({
-				email,
-				password
-			})
-		})
 			.then(async (res) => {
 				if (res.status == 200) {
 					resolve(await res.json())
@@ -110,6 +83,30 @@ export const verifyMail = async (code: string) => {
 	})
 }
 
+export const login = async (email: string, password: string, totpToken?: string) => {
+	return new Promise<{
+		status: string,
+		user: User
+	}>((resolve, reject) => {
+		fetch(PREFIX + '/user/login', {
+			method: 'POST',
+			headers,
+			body: JSON.stringify({
+				email,
+				password,
+				totp: totpToken
+			})
+		})
+			.then(async (res) => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
 export const logout = async () => {
 	return new Promise<void>((resolve, reject) => {
 		fetch(PREFIX + '/user/logout', {
@@ -125,32 +122,9 @@ export const logout = async () => {
 	})
 }
 
-export const getVendors = async (filter?: VendorFilter, page?: number, limit?: number) => {
-	return new Promise<{
-		vendors: Vendor[],
-		page: number,
-		limit: number,
-		totalPages: number,
-		totalCount: number
-	}>((resolve, reject) => {
-		fetch(PREFIX + `/vendor/search?page=${page || 1}&limit=${limit || 25}`, {
-			method: 'POST',
-			headers,
-			body: JSON.stringify(filter || {})
-		})
-			.then(async res => {
-				if (res.status == 200) {
-					resolve(await res.json())
-				} else {
-					reject(await res.json())
-				}
-			})
-	})
-}
-
-export const getVendor = async (id: string) => {
-	return new Promise<Vendor>((resolve, reject) => {
-		fetch(PREFIX + `/vendor/${id}`, {
+export const getProfilePicture = async (id: string) => {
+	return new Promise<{status: string, picture: string}>((resolve, reject) => {
+		fetch(PREFIX + `/user/${id}/profile-picture`, {
 			method: 'GET',
 			headers
 		})
@@ -164,9 +138,9 @@ export const getVendor = async (id: string) => {
 	})
 }
 
-export const getReviews = async (id: string, page: number, limit: number) => {
+export const getUserReviews = async (id: string) => {
 	return new Promise<Review[]>((resolve, reject) => {
-		fetch(PREFIX + `/vendor/${id}/reviews?page=${page}&limit=${limit}`, {
+		fetch(PREFIX + `/user/${id}/reviews`, {
 			method: 'GET',
 			headers
 		})
@@ -186,6 +160,22 @@ export const updateUser = async (update: UserUpdate) => {
 			method: 'POST',
 			headers,
 			body: JSON.stringify(update)
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
+export const deleteAccount = async () => {
+	return new Promise<void>((resolve, reject) => {
+		fetch(PREFIX + '/user/delete-account', {
+			method: 'GET',
+			headers
 		})
 			.then(async res => {
 				if (res.status == 200) {

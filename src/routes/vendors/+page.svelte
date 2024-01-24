@@ -17,9 +17,9 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getVendors } from '$lib/api';
+	import { getVendors } from '$api/vendor';
+	import { user } from '$lib/stores';
 	import VendorCard from '$lib/components/VendorCard.svelte';
-	import LoadingBar from '$lib/components/LoadingBar.svelte';
 	import Paginator from '$lib/components/Paginator.svelte';
 	import VendorFilterMenu from '$lib/components/VendorFilterMenu.svelte';
 
@@ -42,9 +42,6 @@
 			vendors = result.vendors;
 			totalPages = result.totalPages;
 			totalCount = result.totalCount;
-			for (let i in vendors) {
-				vendors[i].logo = '/assets/logo-compact-500x500.png';
-			}
 		});
 	}
 
@@ -78,12 +75,10 @@
 			<h1 class="title">Sorry, there are no results!</h1>
 		{/if}
 	{/if}
-</main>
 
-<style>
-	.card-container {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
-</style>
+	{#if $user}
+		<h2 class="subtitle">
+			Can't find the vendor you're looking for? <a href="/vendors/request">Request it!</a>
+		</h2>
+	{/if}
+</main>

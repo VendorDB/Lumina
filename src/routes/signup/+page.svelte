@@ -17,7 +17,7 @@
 
 <script lang="ts">
 	import { AgeFromDate } from 'age-calculator';
-	import { register } from '$lib/api';
+	import { register } from '$api/user';
 	import { goto } from '$app/navigation';
 
 	const mailRegex =

@@ -18,8 +18,9 @@
 <script lang="ts">
 
 	import {user} from '$lib/stores'
-	import {logout as APILogout} from '$lib/api'
+	import {logout as APILogout} from '$api/user'
 	import Base64Image from './Base64Image.svelte';
+	import { goto } from '$app/navigation';
 
 	let navbarMenu: HTMLDivElement;
 	let navbarBurger: HTMLElement;
@@ -32,6 +33,7 @@
 	function logout() {
 		APILogout()
 		user.set(null)
+		goto('/')
 	}
 
 </script>
@@ -91,12 +93,12 @@
 				<div class="navbar-dropdown is-right">
 					<a class="navbar-item" href="/dashboard/user"> <i class="fas fa-gear"/> &nbsp; User Dashboard </a>
 
-					{#if $user.moderator || $user.admin}
+					{#if $user.perms > 0}
 						<hr class="navbar-divider">
-						<a class="navbar-item" href="/dashboard/moderation"> <i class="fas fa-gavel"/> &nbsp; Moderator Dashboard </a>
+						<a class="navbar-item" href="/dashboard/moderator"> <i class="fas fa-gavel"/> &nbsp; Moderator Dashboard </a>
 					{/if}
 
-					{#if $user.admin}
+					{#if $user.perms > 1}
 						<a class="navbar-item" href="/dashboard/admin"> <i class="fas fa-screwdriver-wrench"/> &nbsp; Admin Dashboard </a>
 					{/if}
 

@@ -19,11 +19,11 @@ declare global {
     interface User {
         _id: string;
         username: string;
-        admin: boolean;
-		moderator: boolean;
+        perms: number;
         email: string;
 		profile_picture: string;
 		about: string;
+		totpEnabled?: boolean;
     }
 
     interface SignupValidator {
@@ -63,22 +63,63 @@ declare global {
 	interface Vendor {
 		_id: string;
 		name: string;
+		url: string;
 		description: string;
 		stars: number;
-		starsAverage: number;
+		reviewAmount: number;
 		logo: string;
 	}
 
 	interface Review {
+		_id: string;
 		author: User;
 		message: string;
 		stars: number;
+		created: number;
 	}
 
 	interface UserUpdate {
 		profile_picture?: string;
 		username?: string;
 		about?: string;
+	}
+
+	interface VendorAddPayload {
+		name: string;
+		description: string;
+		url: string;
+		logo?: string;
+		owner?: string;
+	}
+
+	interface VendorRequest {
+		_id?: string;
+		name: string;
+		url: string;
+		author?: {
+			_id: string;
+			username: string;
+		},
+		created?: number;
+	}
+
+	interface VendorReport {
+		_id: string;
+		reason: 'wrong-info' | 'fraud' | 'closed';
+		message: string;
+		author: {
+			_id: string;
+			username: string;
+		}
+		created: number;
+	}
+
+	interface VendorUpdatePayload {
+		name?: string;
+		description?: string;
+		url?: string;
+		logo?: string;
+		owner?: string;
 	}
 
 }

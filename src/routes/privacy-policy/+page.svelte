@@ -148,13 +148,12 @@
 		<p>As a user of VendorDB, you have the following data subject rights:</p>
 		<ul>
 			<li>
-				Right to access: You can view all data collected about you by logging in and clicking a
-				button.
+				Right to access: You can view all data collected about you in your <a href="/dashboard/user/account-data">Dashboard</a> after logging in.
 			</li>
 			<li>Right to rectification: You can edit your data in user settings.</li>
 			<li>
-				Right to erasure: You can delete your account and all associated data at any time by logging
-				in and clicking a button.
+				Right to erasure: You can delete your account and all associated data at any time in your <a href="/dashboard/user/security">Dashboard</a> after logging
+				in.
 			</li>
 			<li>
 				Right to restriction of processing: If you do not consent to data processing, you can delete

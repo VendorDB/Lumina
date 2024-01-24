@@ -18,19 +18,22 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { verifyMail } from '$lib/api';
+	import { verifyMail } from '$api/user';
+	import { onMount } from 'svelte';
 
 	const code = $page.url.searchParams.get('code') || '';
 
 	let verified = false;
 
-	verifyMail(code)
-		.then(() => {
-			verified = true;
-		})
-		.catch((err) => {
-			alert(err.message);
-		});
+	onMount(() => {
+		verifyMail(code)
+			.then(() => {
+				verified = true;
+			})
+			.catch((err) => {
+				alert(err.message);
+			});
+	});
 </script>
 
 <main class="container has-text-centered">
