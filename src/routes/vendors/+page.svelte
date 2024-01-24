@@ -26,7 +26,7 @@
 	let vendors: any;
 
 	let page = 1;
-	let limit = 25;
+	let limit = 12;
 	let filter = {};
 
 	let totalPages: number;
