@@ -22,16 +22,25 @@
 	<h1 class="title main-title">VendorDB</h1>
 	<h2>Providing independent information on Research Chemical vendors</h2>
 
+	<div style="margin-top: 1rem;">
+		<a href="/vendors">
+			<button class="button is-primary">Vendor List&nbsp;<i class="fa-solid fa-arrow-right" /></button>
+		</a>
+	</div>
+
 	<div class="section">
 		<h1 class="title">Who We Are</h1>
 		<p>
-			The goal of VendorDB is to provide you with all the information you need for safely shopping in the space of Research Chemicals.
+			The goal of VendorDB is to provide you with all the information you need for safely shopping
+			in the space of Research Chemicals.
 			<br /><br />
-			We will always stay completely independent. We provide information to you, not advertisement to vendors.
-			<br><br>
+			We will always stay completely independent. We provide information to you, not advertisement to
+			vendors.
+			<br /><br />
 			Currently, the site is still under heavy development. Expect a constant influx of new stuff!
-			<br><br>
-			Additionally, the entirety of VendorDB is <a href="https://github.com/VendorDB" target="_blank" rel="noreferrer">Free&Open-Source</a>!
+			<br /><br />
+			Additionally, the entirety of VendorDB is
+			<a href="https://github.com/VendorDB" target="_blank" rel="noreferrer">Free&Open-Source</a>!
 		</p>
 	</div>
 
