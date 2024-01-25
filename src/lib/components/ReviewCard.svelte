@@ -22,6 +22,7 @@
 	import { getProfilePicture } from '$api/user';
 	import { user } from '$lib/stores';
 	import { likeReview } from '$api/vendor';
+	import { abbreviateNumber } from '$util/math';
 
 	export let review: Review;
 	export let vendor: Vendor | null = null;
@@ -66,11 +67,15 @@
 				<div style="margin-top: 0.5rem;">
 					{#if !$user || review.author._id == $user._id || review.likes.includes($user._id)}
 						<button class="button is-danger"
-							><i class="fa-solid fa-heart" />&nbsp;{review.likeAmount || 0}</button
+							><i class="fa-solid fa-heart" />&nbsp;{review.likeAmount
+								? abbreviateNumber(review.likeAmount, 2)
+								: 0}</button
 						>
 					{:else}
 						<button class="button is-danger is-outlined" on:click={like}
-							><i class="fa-regular fa-heart" />&nbsp;{review.likeAmount || 0}</button
+							><i class="fa-regular fa-heart" />&nbsp;{review.likeAmount
+								? abbreviateNumber(review.likeAmount, 2)
+								: 0}</button
 						>
 					{/if}
 				</div>
