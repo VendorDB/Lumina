@@ -182,6 +182,7 @@
 					<select bind:value={sortType} on:change={reloadReviews}>
 						<option value="created">Date</option>
 						<option value="stars">Stars</option>
+						<option value="likeAmount">Likes</option>
 					</select>
 				</div>
 
