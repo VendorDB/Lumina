@@ -78,6 +78,7 @@ declare global {
 		created: number;
 		likes: string[];
 		likeAmount: number;
+		vendor: string;
 	}
 
 	interface UserUpdate {

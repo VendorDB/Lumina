@@ -16,7 +16,8 @@
 -->
 
 <script lang="ts">
-	import { getVendor, getReviews, postReview as APIpostReview, reportVendor } from '$api/vendor';
+	import { getVendor, reportVendor } from '$api/vendor';
+	import { getReviews, postReview as APIpostReview } from '$api/review';
 	import { onMount } from 'svelte';
 	import StarsDisplay from '$lib/components/StarsDisplay.svelte';
 	import StarsSelector from '$lib/components/StarsSelector.svelte';
@@ -205,7 +206,13 @@
 
 			<div class="review-card-wrapper">
 				{#each reviews as review}
-					<ReviewCard {review} {vendor} />
+					<ReviewCard
+						{review}
+						on:delete={(event) => {
+							const id = event.detail;
+							reviews = reviews.filter((x) => x._id != id);
+						}}
+					/>
 				{/each}
 			</div>
 

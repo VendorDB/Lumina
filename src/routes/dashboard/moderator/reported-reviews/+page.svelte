@@ -16,7 +16,7 @@
 -->
 
 <script lang="ts">
-	import { listHeldReviews, unholdReview } from '$api/moderator/review';
+	import { listReportedReviews, unreportReview, deleteReview } from '$api/moderator/review';
 	import { onMount } from 'svelte';
 	import ReviewCard from '$lib/components/ReviewCard.svelte';
 
@@ -27,26 +27,26 @@
 	});
 
 	function next() {
-		listHeldReviews(1, 1).then((reviews) => {
+		listReportedReviews(1, 1).then((reviews) => {
 			currentReview = reviews[0] || undefined;
 		});
 	}
 
 	function accept() {
-		unholdReview(currentReview._id, 'ACCEPT').then(() => {
+		unreportReview(currentReview._id).then(() => {
 			next();
 		});
 	}
 
 	function deny() {
-		unholdReview(currentReview._id, 'DENY').then(() => {
+		deleteReview(currentReview._id).then(() => {
 			next();
 		});
 	}
 </script>
 
 <main class="container has-text-centered">
-	<h1 class="title">Held Reviews</h1>
+	<h1 class="title">Reported Reviews</h1>
 
 	{#if currentReview}
 		<div class="card-container" style="justify-content: left;">
