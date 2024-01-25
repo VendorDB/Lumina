@@ -19,18 +19,21 @@
 	import { goto } from '$app/navigation';
 	import { createVendor } from '$api/admin/vendor';
 	import ImagePicker from '$lib/components/ImagePicker.svelte';
+	import CountrySelector from '$lib/components/CountrySelector.svelte';
 
 	let name: string;
 	let description: string;
 	let logo: string;
 	let url: string;
+	let country: Country | undefined;
 
 	function submit() {
 		createVendor({
 			name,
 			description,
 			logo,
-			url
+			url,
+			country
 		}).then((data) => {
 			goto(`/vendors/${data.id}`)
 		})
@@ -75,6 +78,13 @@
 			<label for="url" class="label">URL</label>
 			<div class="control">
 				<input class="input" id="url" type="url" bind:value={url}>
+			</div>
+		</div>
+
+		<div class="field">
+			<label for="country" class="label">Country</label>
+			<div class="control">
+				<CountrySelector bind:selected={country} />
 			</div>
 		</div>
 

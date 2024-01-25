@@ -94,6 +94,7 @@ declare global {
 		url: string;
 		logo?: string;
 		owner?: string;
+		country?: Country;
 	}
 
 	interface VendorRequest {
