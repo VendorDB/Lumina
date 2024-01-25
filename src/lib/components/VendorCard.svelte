@@ -16,11 +16,9 @@
 -->
 
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import StarsDisplay from '$lib/components/StarsDisplay.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import Base64Image from './Base64Image.svelte';
-	import CountrySelector from './CountrySelector.svelte';
 
 	export let vendor: Vendor;
 	export let admin: boolean = false;
@@ -28,50 +26,44 @@
 	const dispatch = createEventDispatcher();
 </script>
 
-<div
-	class="card has-background-dark"
-	role="button"
-	tabindex="0"
-	on:click={() => {
-		if (!admin) goto(`/vendors/${vendor._id}`);
-	}}
-	on:keypress={() => {
-		if (!admin) goto(`/vendors/${vendor._id}`);
-	}}
->
-	{#if vendor.country}
-		<span class="country-indicator" title={vendor.country.name}>{vendor.country.flag}</span>
-	{/if}
-	<div class="card-image">
-		<figure class="image is-4by3">
-			<Base64Image imageData={vendor.logo} alt={vendor.name} style="object-fit: contain;" />
-		</figure>
-	</div>
-	<div class="card-content">
-		<p class="card-title has-text-white">{vendor.name}</p>
-
-		<StarsDisplay stars={vendor.stars / vendor.reviewAmount} />
-
-		<div class="content has-text-white">
-			{vendor.description}
-		</div>
-
-		{#if admin}
-			<button
-				class="button is-info"
-				on:click={() => {
-					dispatch('adminAction', {type: 'edit', vendor});
-				}}><i class="fa-solid fa-pen" /></button
-			>
-			<button
-				class="button is-danger"
-				on:click={() => {
-					dispatch('adminAction', {type: 'delete', vendor});
-				}}><i class="fa-solid fa-trash" /></button
-			>
+<a href={admin ? '' : `/vendors/${vendor._id}`} on:click={(event) => {
+	if(admin)event.preventDefault()
+}}>
+	<div class="card has-background-dark" role="button" tabindex="0">
+		{#if vendor.country}
+			<span class="country-indicator" title={vendor.country.name}>{vendor.country.flag}</span>
 		{/if}
+		<div class="card-image">
+			<figure class="image is-4by3">
+				<Base64Image imageData={vendor.logo} alt={vendor.name} style="object-fit: contain;" />
+			</figure>
+		</div>
+		<div class="card-content">
+			<p class="card-title has-text-white">{vendor.name}</p>
+	
+			<StarsDisplay stars={vendor.stars / vendor.reviewAmount} />
+	
+			<div class="content has-text-white">
+				{vendor.description}
+			</div>
+	
+			{#if admin}
+				<button
+					class="button is-info"
+					on:click={() => {
+						dispatch('adminAction', { type: 'edit', vendor });
+					}}><i class="fa-solid fa-pen" /></button
+				>
+				<button
+					class="button is-danger"
+					on:click={() => {
+						dispatch('adminAction', { type: 'delete', vendor });
+					}}><i class="fa-solid fa-trash" /></button
+				>
+			{/if}
+		</div>
 	</div>
-</div>
+</a>
 
 <style>
 	.card {
@@ -101,5 +93,4 @@
 		z-index: 1;
 		font-size: xx-large;
 	}
-
 </style>
