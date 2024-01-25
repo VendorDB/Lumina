@@ -73,7 +73,7 @@
 			<div class="field">
 				<label class="slider-label" for="rating-control">
 					Min Average Rating:
-					<span class="slider-value">{minAverageRating}</span>
+					<span class="slider-value">{minAverageRating.toFixed(1)}</span>
 				</label>
 				<input
 					class="slider control is-fullwidth"
