@@ -21,6 +21,7 @@
 	import { getVendor } from '$api/vendor';
 	import ImagePicker from '$lib/components/ImagePicker.svelte';
 	import { onMount } from 'svelte';
+	import CountrySelector from '$lib/components/CountrySelector.svelte';
 
 	export let data;
 
@@ -28,28 +29,29 @@
 	let description: string;
 	let logo: string;
 	let url: string;
+	let country: Country | undefined;
 
 	onMount(() => {
-		getVendor(data.id)
-			.then(vendor => {
-				name = vendor.name
-				description = vendor.description
-				logo = vendor.logo
-				url = vendor.url
-			})
-	})
+		getVendor(data.id).then((vendor) => {
+			name = vendor.name;
+			description = vendor.description;
+			logo = vendor.logo;
+			url = vendor.url;
+			country = vendor.country;
+		});
+	});
 
 	function submit() {
 		updateVendor(data.id, {
 			name,
 			description,
 			logo,
-			url
+			url,
+			country: country || false
 		}).then(() => {
-			goto(`/vendors/${data.id}`)
-		})
+			goto(`/vendors/${data.id}`);
+		});
 	}
-
 </script>
 
 <main class="container has-text-centered">
@@ -58,18 +60,18 @@
 	<form on:submit={submit}>
 		<div class="field">
 			<label for="logo" class="label">Logo</label>
-			<ImagePicker on:pick={event => {logo = event.detail}} imageData={logo} />
+			<ImagePicker
+				on:pick={(event) => {
+					logo = event.detail;
+				}}
+				imageData={logo}
+			/>
 		</div>
 
 		<div class="field">
 			<label for="name" class="label">Name</label>
 			<div class="control">
-				<input
-					id="name"
-					class="input"
-					type="text"
-					bind:value={name}
-				/>
+				<input id="name" class="input" type="text" bind:value={name} />
 			</div>
 		</div>
 
@@ -88,10 +90,18 @@
 		<div class="field">
 			<label for="url" class="label">URL</label>
 			<div class="control">
-				<input class="input" id="url" type="url" bind:value={url}>
+				<input class="input" id="url" type="url" bind:value={url} />
+			</div>
+		</div>
+
+		<div class="field">
+			<label for="country" class="label">Country</label>
+			<div class="control">
+				<CountrySelector bind:selected={country} />
 			</div>
 		</div>
 
 		<button class="button is-primary" type="submit"> Save </button>
+
 	</form>
 </main>

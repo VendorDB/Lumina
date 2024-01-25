@@ -68,6 +68,7 @@ declare global {
 		stars: number;
 		reviewAmount: number;
 		logo: string;
+		country?: Country;
 	}
 
 	interface Review {
@@ -123,6 +124,14 @@ declare global {
 		url?: string;
 		logo?: string;
 		owner?: string;
+		country?: Country | false;
+	}
+
+	interface Country {
+		label: string;
+		value: string;
+		flag: string;
+		name: string;
 	}
 
 }

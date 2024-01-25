@@ -129,7 +129,7 @@
 	}
 </script>
 
-<main class="container has-text-centered">
+<main class="container has-text-centered vendor-page">
 	{#if vendor}
 		<div id="vendor-disclaimer">
 			<strong>Disclaimer</strong> <br />
@@ -139,7 +139,13 @@
 		<div id="header" class="section">
 			<Base64Image imageData={vendor.logo} alt="Logo" style="width: 10rem" />
 			<h1 class="title">{vendor.name}</h1>
-			<h2 class="subtitle">{vendor.description}</h2>
+			<h2 class="subtitle" style="margin-bottom: 0;">{vendor.description}</h2>
+
+			{#if vendor.country}
+				<div style="margin-top: 1rem; margin-bottom: 1rem;" class="country-indicator"
+					>{vendor.country.label}</div>
+			{/if}
+
 			<a href={vendor.url} target="_blank" rel="noreferrer"
 				><button class="button is-primary"
 					>Visit&nbsp;<i class="fa-solid fa-up-right-from-square" /></button
@@ -299,5 +305,13 @@
 	textarea {
 		resize: none;
 		margin-bottom: 1rem;
+	}
+
+	.country-indicator {
+		width: fit-content;
+		padding: 0.5rem;
+		border-radius: 25px;
+		display: block;
+		margin: 0 auto;
 	}
 </style>
