@@ -64,7 +64,7 @@
 			</div>
 			{#if vendor}
 				<div style="margin-top: 0.5rem;">
-					{#if !$user || review.likes.includes($user._id)}
+					{#if !$user || review.author._id == $user._id || review.likes.includes($user._id)}
 						<button class="button is-danger"
 							><i class="fa-solid fa-heart" />&nbsp;{review.likeAmount || 0}</button
 						>
