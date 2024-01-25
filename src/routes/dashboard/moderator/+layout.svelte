@@ -69,6 +69,21 @@ tabindex="0"
 					Held Reviews
 				</a>
 
+				<!-- svelte-ignore a11y-missing-attribute -->
+				<a
+					class={activePage === 'reported-reviews' ? 'is-active' : ''}
+					role="button"
+					tabindex="0"
+					on:click={() => navigate('reported-reviews')}
+					on:keydown={(e) => {
+						if (e.key === 'Enter') {
+							navigate('reported-reviews');
+						}
+					}}
+				>
+					Reported Reviews
+				</a>
+
 			</li>
 		</ul>
 

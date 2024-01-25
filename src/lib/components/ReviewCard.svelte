@@ -18,16 +18,24 @@
 <script lang="ts">
 	import StarsDisplay from './StarsDisplay.svelte';
 	import Base64Image from './Base64Image.svelte';
-	import { onMount } from 'svelte';
+	import { createEventDispatcher, onMount } from 'svelte';
 	import { getProfilePicture } from '$api/user';
 	import { user } from '$lib/stores';
-	import { likeReview } from '$api/vendor';
+	import { likeReview, reportReview } from '$api/review';
 	import { abbreviateNumber } from '$util/math';
+	import { deleteReview } from '$api/moderator/review';
+	import Modal from './Modal.svelte';
+	import ReviewCard from './ReviewCard.svelte';
+
+	const dispatch = createEventDispatcher();
 
 	export let review: Review;
-	export let vendor: Vendor | null = null;
+	export let displayOnly = false;
 
 	let profilePicture: string;
+
+	let deleteConfirmModal: Modal;
+	let reportConfirmModal: Modal;
 
 	onMount(async () => {
 		profilePicture = (await getProfilePicture(review.author._id)).picture;
@@ -39,8 +47,7 @@
 	}
 
 	function like() {
-		if (!vendor) return;
-		likeReview(vendor._id, review._id).then(() => {
+		likeReview(review.vendor, review._id).then(() => {
 			if (!$user) return;
 			review.likeAmount += 1;
 			review.likes.push($user._id);
@@ -63,7 +70,7 @@
 			<div>
 				{formatDate(review.created)}
 			</div>
-			{#if vendor}
+			{#if !displayOnly}
 				<div style="margin-top: 0.5rem;">
 					{#if !$user || review.author._id == $user._id || review.likes.includes($user._id)}
 						<button class="button is-danger"
@@ -78,6 +85,22 @@
 								: 0}</button
 						>
 					{/if}
+
+					{#if $user}
+						{#if $user.perms >= 1}
+							<button
+								class="button is-danger"
+								on:click={() => {
+									deleteConfirmModal.open();
+								}}><i class="fa-solid fa-trash-can" /></button
+							>
+						{:else if $user._id != review.author._id}
+							<button title="Report" class="button is-danger" on:click={() => {
+								reportConfirmModal.open()
+							}}><i class="fa-solid fa-flag" /></button
+							>
+						{/if}
+					{/if}
 				</div>
 			{/if}
 		</div>
@@ -87,6 +110,41 @@
 		</div>
 	{/if}
 </div>
+
+{#if !displayOnly}
+	<Modal
+		bind:this={deleteConfirmModal}
+		title="Confirm Deletion"
+		buttons={['cancel', 'confirm']}
+		on:buttonClick={(event) => {
+			if (event.detail == 'confirm') {
+				deleteReview(review._id);
+				dispatch('delete', review._id);
+			}
+		}}
+	>
+		<h2 class="subtitle">Do you really want to delete this review?</h2>
+		<div>
+			<ReviewCard displayOnly {review} />
+		</div>
+	</Modal>
+
+	<Modal
+		bind:this={reportConfirmModal}
+		title="Confirm Report"
+		buttons={['cancel', 'confirm']}
+		on:buttonClick={(event) => {
+			if (event.detail == 'confirm') {
+				reportReview(review.vendor, review._id)
+			}
+		}}
+	>
+		<h2 class="subtitle">Do you really want to report this review?</h2>
+		<div>
+			<ReviewCard displayOnly {review} />
+		</div>
+	</Modal>
+{/if}
 
 <style>
 	.review {

@@ -15,6 +15,41 @@
 
 import { PREFIX, headers } from "../vars"
 
+export const listReportedReviews = async (page: number, limit: number) => {
+	return new Promise<Review[]>((resolve, reject) => {
+		fetch(PREFIX + `/moderator/review/list-reported?page=${page}&limit=${limit}`, {
+			method: 'GET',
+			headers
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
+export const unreportReview = async (id: string) => {
+	return new Promise<{status: string}>((resolve, reject) => {
+		fetch(PREFIX + `/moderator/review/unreport`, {
+			method: 'POST',
+			headers,
+			body: JSON.stringify({
+				id
+			})
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
 export const listHeldReviews = async (page: number, limit: number) => {
 	return new Promise<Review[]>((resolve, reject) => {
 		fetch(PREFIX + `/moderator/review/list-held?page=${page}&limit=${limit}`, {
@@ -39,6 +74,25 @@ export const unholdReview = async (id: string, action: 'ACCEPT' | 'DENY') => {
 			body: JSON.stringify({
 				id,
 				action
+			})
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
+export const deleteReview = async (id: string) => {
+	return new Promise<{status: string}>((resolve, reject) => {
+		fetch(PREFIX + `/moderator/review/delete`, {
+			method: 'POST',
+			headers,
+			body: JSON.stringify({
+				id
 			})
 		})
 			.then(async res => {

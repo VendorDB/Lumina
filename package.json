@@ -37,6 +37,9 @@
 	"type": "module",
 	"dependencies": {
 		"age-calculator": "^1.0.0",
-		"qrcode": "^1.5.3"
+		"qrcode": "^1.5.3",
+		"svelecte": "^3.17.2",
+		"svelte-select": "^5.8.3",
+		"world-countries": "^5.0.0"
 	}
 }

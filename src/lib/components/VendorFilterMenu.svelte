@@ -16,83 +16,84 @@
 -->
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import CountrySelector from './CountrySelector.svelte';
+	import Modal from './Modal.svelte';
 
-	let isFilterVisible = false;
+	let filterModal: Modal;
+
 	let name: string | undefined;
 	let minAverageRating = 0;
+	let country: Country;
 
 	const dispatch = createEventDispatcher();
 
 	function applyFilters() {
-		if(name && name.trim() == '') name = undefined
+		if (name && name.trim() == '') name = undefined;
 		const filterData = {
 			name,
 			description: name,
-			minAverageRating
+			minAverageRating,
+			country: country?.value || undefined
 		};
 		dispatch('filtersApplied', filterData);
 	}
 
-	function handleButton() {
-		if (isFilterVisible) {
-			applyFilters();
-		}
-
-		isFilterVisible = !isFilterVisible;
-	}
 </script>
 
 <div>
 	<button
-		class="button is-rounded {isFilterVisible ? 'is-primary' : 'is-info'}"
-		on:click={handleButton}
+		class="button is-rounded is-primary"
+		on:click={filterModal.open}
 	>
-		{#if isFilterVisible}
-			<i class="fas fa-check" />&nbsp; Apply
-		{:else}
-			<i class="fas fa-sliders" />&nbsp; Filter
-		{/if}
+		<i class="fas fa-sliders" />&nbsp; Filter
 	</button>
 </div>
 
-<div class="filter-panel {isFilterVisible ? 'show-panel' : ''}">
-	<form class="compact-menu" on:submit={handleButton}>
-		<div class="field">
-			<label class="label" for="name-control">Name</label>
-			<div class="control" id="name-control">
-				<input class="input" type="text" bind:value={name} />
+<Modal bind:this={filterModal} title="Vendor Filter" buttons={['cancel', 'confirm']} on:buttonClick={(event) => {
+	if(event.detail == 'confirm') {
+		applyFilters()
+	}
+}}>
+	<div class="filter-panel">
+		<form class="compact-menu">
+			<div class="field">
+				<label class="label" for="name-control">Name</label>
+				<div class="control" id="name-control">
+					<input class="input" type="text" bind:value={name} />
+				</div>
 			</div>
-		</div>
 
-		<div class="field">
-			<label class="slider-label" for="rating-control">
-				Min Average Rating:
-				<span class="slider-value">{minAverageRating}</span>
-			</label>
-			<input
-				class="slider control is-fullwidth"
-				id="rating-control"
-				type="range"
-				min="0"
-				max="5"
-				step="0.1"
-				bind:value={minAverageRating}
-			/>
-		</div>
-	</form>
-</div>
+			<div class="field">
+				<label class="label" for="country-control">Country</label>
+				<div class="control" id="country-control">
+					<CountrySelector bind:selected={country} />
+				</div>
+			</div>
+
+			<div class="field">
+				<label class="slider-label" for="rating-control">
+					Min Average Rating:
+					<span class="slider-value">{minAverageRating}</span>
+				</label>
+				<input
+					class="slider control is-fullwidth"
+					id="rating-control"
+					type="range"
+					min="0"
+					max="5"
+					step="0.1"
+					bind:value={minAverageRating}
+				/>
+			</div>
+		</form>
+	</div>
+</Modal>
 
 <style>
 	.filter-panel {
-		background-color: #252525;
 		color: #ffffff;
 		padding: 1rem;
 		border-radius: 0.5rem;
-		display: none;
-	}
-
-	.show-panel {
-		display: block;
 	}
 
 	.compact-menu {

@@ -15,32 +15,9 @@
 
 import { PREFIX, headers } from "./vars"
 
-export const getVendors = async (filter?: VendorFilter, page?: number, limit?: number) => {
-	return new Promise<{
-		vendors: Vendor[],
-		page: number,
-		limit: number,
-		totalPages: number,
-		totalCount: number
-	}>((resolve, reject) => {
-		fetch(PREFIX + `/vendor/search?page=${page || 1}&limit=${limit || 25}`, {
-			method: 'POST',
-			headers,
-			body: JSON.stringify(filter || {})
-		})
-			.then(async res => {
-				if (res.status == 200) {
-					resolve(await res.json())
-				} else {
-					reject(await res.json())
-				}
-			})
-	})
-}
-
-export const getVendor = async (id: string) => {
-	return new Promise<Vendor>((resolve, reject) => {
-		fetch(PREFIX + `/vendor/${id}`, {
+export const likeReview = async (vendor_id: string, review_id: string) => {
+	return new Promise<{isHeld?: boolean}>((resolve, reject) => {
+		fetch(PREFIX + `/vendor/${vendor_id}/reviews/${review_id}/like`, {
 			method: 'GET',
 			headers
 		})
@@ -54,12 +31,11 @@ export const getVendor = async (id: string) => {
 	})
 }
 
-export const requestVendor = async (request: VendorRequest) => {
-	return new Promise<{status: string}>((resolve, reject) => {
-		fetch(PREFIX + `/vendor/request`, {
-			method: 'POST',
-			headers,
-			body: JSON.stringify(request)
+export const reportReview = async (vendor_id: string, review_id: string) => {
+	return new Promise<{isHeld?: boolean}>((resolve, reject) => {
+		fetch(PREFIX + `/vendor/${vendor_id}/reviews/${review_id}/report`, {
+			method: 'GET',
+			headers
 		})
 			.then(async res => {
 				if (res.status == 200) {
@@ -71,15 +47,28 @@ export const requestVendor = async (request: VendorRequest) => {
 	})
 }
 
-export const reportVendor = async (id: string, reason: string, message: string) => {
-	return new Promise<{status: string}>((resolve, reject) => {
-		fetch(PREFIX + `/vendor/${id}/report`, {
+export const postReview = async (id: string, message: string, stars: number) => {
+	return new Promise<{isHeld?: boolean}>((resolve, reject) => {
+		fetch(PREFIX + `/vendor/${id}/reviews`, {
 			method: 'POST',
 			headers,
-			body: JSON.stringify({
-				reason,
-				message
+			body: JSON.stringify({message, stars})
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
 			})
+	})
+}
+
+export const getReviews = async (id: string, page: number, limit: number, order: string, sort: string) => {
+	return new Promise<Review[]>((resolve, reject) => {
+		fetch(PREFIX + `/vendor/${id}/reviews?page=${page}&limit=${limit}&order=${order}&sort=${sort}`, {
+			method: 'GET',
+			headers
 		})
 			.then(async res => {
 				if (res.status == 200) {
