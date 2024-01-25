@@ -24,6 +24,13 @@
 
 	const items: Country[] = []
 
+	items.push({
+		label: '🇪🇺 European Union',
+		value: 'EU',
+		flag: '🇪🇺',
+		name: 'European Union'
+	})
+
 	for(let country of countries) {
 		items.push({
 			label: `${country.flag} ${country.name.common}`,
@@ -32,6 +39,10 @@
 			name: country.name.common
 		})
 	}
+
+	items.sort((a, b) => {
+		return (a.name > b.name) ? 1 : -1
+	})
 
 	export let selected: Country | null = null;
 </script>
