@@ -31,6 +31,7 @@
 	};
 
 	function goToPage(newPage: number) {
+		if(newPage > totalPages || newPage < 1)return
 		page = newPage;
 		dispatch('switch', {
 			page
