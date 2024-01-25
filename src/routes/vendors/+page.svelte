@@ -33,6 +33,8 @@
 	let totalPages: number;
 	let totalCount: number;
 
+	let paginator: Paginator;
+
 	let loading = true
 
 	onMount(() => {
@@ -41,11 +43,13 @@
 
 	async function update() {
 		getVendors(filter, page, limit).then((result) => {
-			console.log(result);
 			vendors = result.vendors;
 			totalPages = result.totalPages;
 			totalCount = result.totalCount;
 			loading = false
+			if(paginator) {
+				paginator.setPages(totalPages)
+			}
 		});
 	}
 
@@ -74,7 +78,7 @@
 					<VendorCard {vendor} />
 				{/each}
 			</div>
-			<Paginator {totalPages} on:switch={handlePaginatorSwitch} />
+			<Paginator bind:this={paginator} {totalPages} on:switch={handlePaginatorSwitch} />
 		{:else if loading}
 			<LoadingBar />
 		{:else}

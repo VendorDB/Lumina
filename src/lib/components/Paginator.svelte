@@ -16,21 +16,25 @@
 -->
 
 <script lang="ts">
-	import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher } from 'svelte';
 
+	const dispatch = createEventDispatcher();
 
-	const dispatch = createEventDispatcher()
-
-	export let totalPages: number
-	export let page = 1
+	export let totalPages: number;
+	export let page = 1;
 
 	let pageNumbers = getPageRange();
 
+	export const setPages = (pages: number) => {
+		totalPages = pages;
+		pageNumbers = getPageRange();
+	};
+
 	function goToPage(newPage: number) {
-		page = newPage
+		page = newPage;
 		dispatch('switch', {
 			page
-		})
+		});
 	}
 
 	function getPageRange() {
@@ -46,7 +50,6 @@
 
 		return Array.from({ length: end - start + 1 }, (_, i) => start + i);
 	}
-
 </script>
 
 <nav class="pagination is-centered is-rounded" aria-label="pagination">
