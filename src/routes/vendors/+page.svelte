@@ -22,6 +22,7 @@
 	import VendorCard from '$lib/components/VendorCard.svelte';
 	import Paginator from '$lib/components/Paginator.svelte';
 	import VendorFilterMenu from '$lib/components/VendorFilterMenu.svelte';
+	import LoadingBar from '$lib/components/LoadingBar.svelte';
 
 	let vendors: any;
 
@@ -31,6 +32,8 @@
 
 	let totalPages: number;
 	let totalCount: number;
+
+	let loading = true
 
 	onMount(() => {
 		update();
@@ -42,6 +45,7 @@
 			vendors = result.vendors;
 			totalPages = result.totalPages;
 			totalCount = result.totalCount;
+			loading = false
 		});
 	}
 
@@ -71,6 +75,8 @@
 				{/each}
 			</div>
 			<Paginator {totalPages} on:switch={handlePaginatorSwitch} />
+		{:else if loading}
+			<LoadingBar />
 		{:else}
 			<h1 class="title">Sorry, there are no results!</h1>
 		{/if}

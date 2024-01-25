@@ -87,6 +87,22 @@ export const postReview = async (id: string, message: string, stars: number) => 
 	})
 }
 
+export const likeReview = async (vendor_id: string, review_id: string) => {
+	return new Promise<{isHeld?: boolean}>((resolve, reject) => {
+		fetch(PREFIX + `/vendor/${vendor_id}/reviews/${review_id}/like`, {
+			method: 'GET',
+			headers
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
 export const requestVendor = async (request: VendorRequest) => {
 	return new Promise<{status: string}>((resolve, reject) => {
 		fetch(PREFIX + `/vendor/request`, {
