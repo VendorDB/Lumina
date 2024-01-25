@@ -204,7 +204,7 @@
 
 			<div class="review-card-wrapper">
 				{#each reviews as review}
-					<ReviewCard {review} />
+					<ReviewCard {review} {vendor} />
 				{/each}
 			</div>
 

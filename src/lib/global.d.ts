@@ -76,6 +76,8 @@ declare global {
 		message: string;
 		stars: number;
 		created: number;
+		likes: string[];
+		likeAmount: number;
 	}
 
 	interface UserUpdate {

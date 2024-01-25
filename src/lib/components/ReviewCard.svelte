@@ -20,8 +20,11 @@
 	import Base64Image from './Base64Image.svelte';
 	import { onMount } from 'svelte';
 	import { getProfilePicture } from '$api/user';
+	import { user } from '$lib/stores';
+	import { likeReview } from '$api/vendor';
 
 	export let review: Review;
+	export let vendor: Vendor | null = null;
 
 	let profilePicture: string;
 
@@ -32,6 +35,15 @@
 	function formatDate(timestamp: number) {
 		const date = new Date(timestamp);
 		return date.toLocaleString();
+	}
+
+	function like() {
+		if (!vendor) return;
+		likeReview(vendor._id, review._id).then(() => {
+			if (!$user) return;
+			review.likeAmount += 1;
+			review.likes.push($user._id);
+		});
 	}
 </script>
 
@@ -50,6 +62,19 @@
 			<div>
 				{formatDate(review.created)}
 			</div>
+			{#if vendor}
+				<div style="margin-top: 0.5rem;">
+					{#if !$user || review.likes.includes($user._id)}
+						<button class="button is-danger"
+							><i class="fa-solid fa-heart" />&nbsp;{review.likeAmount || 0}</button
+						>
+					{:else}
+						<button class="button is-danger is-outlined" on:click={like}
+							><i class="fa-regular fa-heart" />&nbsp;{review.likeAmount || 0}</button
+						>
+					{/if}
+				</div>
+			{/if}
 		</div>
 		<span class="divider" />
 		<div class="review-content">
