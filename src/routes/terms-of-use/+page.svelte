@@ -183,10 +183,9 @@
 		<h2 class="title is-4">7. Governing Law</h2>
 		<div class="content">
 			<p>
-				These Terms of Use shall be governed by and construed in accordance with the laws of the
-				European Union. Any dispute arising out of or relating to these Terms of Use, including
+				These Terms of Use shall be governed by and construed in accordance with the laws of Germany. Any dispute arising out of or relating to these Terms of Use, including
 				their interpretation, validity, or termination, shall be subject to the exclusive
-				jurisdiction of the courts of the European Union.
+				jurisdiction of the courts of Germany.
 			</p>
 		</div>
 	</section>
