@@ -171,11 +171,13 @@
 						placeholder="Your Review"
 						maxlength="2500"
 					/>
-					<StarsSelector bind:this={starsSelector} bind:selectedStars />
+					<div>
+						<StarsSelector bind:this={starsSelector} bind:selectedStars />
+					</div>
 					<button
 						on:click={postReview}
 						class="button is-primary"
-						disabled={!(selectedStars > 0 && reviewInput.trim() != '')}
+						disabled={!(selectedStars <= 5 && selectedStars > 0 && reviewInput.trim() != '')}
 						style="margin-top: 1rem;">Send Review&nbsp;<i class="fa-solid fa-paper-plane" /></button
 					>
 				</div>
