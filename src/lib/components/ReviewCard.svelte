@@ -22,6 +22,7 @@
 	import { getProfilePicture } from '$api/user';
 	import { user } from '$lib/stores';
 	import { likeReview, reportReview } from '$api/review';
+	import { getVendor } from '$api/vendor';
 	import { abbreviateNumber } from '$util/math';
 	import { deleteReview } from '$api/moderator/review';
 	import Modal from './Modal.svelte';
@@ -31,14 +32,19 @@
 
 	export let review: Review;
 	export let displayOnly = false;
+	export let displayVendor = false;
 
 	let profilePicture: string;
+	let vendor: Vendor;
 
 	let deleteConfirmModal: Modal;
 	let reportConfirmModal: Modal;
 
 	onMount(async () => {
 		profilePicture = (await getProfilePicture(review.author._id)).picture;
+		if (displayVendor) {
+			vendor = await getVendor(review.vendor);
+		}
 	});
 
 	function formatDate(timestamp: number) {
@@ -58,14 +64,16 @@
 <div class="review">
 	{#if review}
 		<div class="review-header">
-			<div>
-				<Base64Image
-					imageData={profilePicture}
-					alt="Profile Picture"
-					style="width: 2rem; border-radius: 25px;"
-				/>
-			</div>
-			{review.author.username}
+			<a href={`/profile/${review.author._id}`}>
+				<div>
+					<Base64Image
+						imageData={profilePicture}
+						alt="Profile Picture"
+						style="width: 2rem; border-radius: 25px;"
+					/>
+				</div>
+				{review.author.username}
+			</a>
 			<StarsDisplay stars={review.stars} />
 			<div>
 				{formatDate(review.created)}
@@ -95,9 +103,12 @@
 								}}><i class="fa-solid fa-trash-can" /></button
 							>
 						{:else if $user._id != review.author._id}
-							<button title="Report" class="button is-danger" on:click={() => {
-								reportConfirmModal.open()
-							}}><i class="fa-solid fa-flag" /></button
+							<button
+								title="Report"
+								class="button is-danger"
+								on:click={() => {
+									reportConfirmModal.open();
+								}}><i class="fa-solid fa-flag" /></button
 							>
 						{/if}
 					{/if}
@@ -106,6 +117,14 @@
 		</div>
 		<span class="divider" />
 		<div class="review-content">
+			{#if displayVendor && vendor}
+				<a href={`/vendors/${vendor._id}`} class="vendor-indicator-link">
+					<div class="vendor-indicator">
+						<Base64Image imageData={vendor.logo} alt="Logo" style="width: 1rem;" />
+						{vendor.name}
+					</div>
+				</a>
+			{/if}
 			<textarea readonly rows="10">{review.message}</textarea>
 		</div>
 	{/if}
@@ -135,7 +154,7 @@
 		buttons={['cancel', 'confirm']}
 		on:buttonClick={(event) => {
 			if (event.detail == 'confirm') {
-				reportReview(review.vendor, review._id)
+				reportReview(review.vendor, review._id);
 			}
 		}}
 	>
@@ -147,6 +166,13 @@
 {/if}
 
 <style>
+	.vendor-indicator {
+		border-radius: 25px;
+		padding: 0.5rem;
+		width: fit-content;
+		margin: 0 auto;
+	}
+
 	.review {
 		border-radius: 25px;
 		width: 100%;

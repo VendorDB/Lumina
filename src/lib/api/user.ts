@@ -138,9 +138,9 @@ export const getProfilePicture = async (id: string) => {
 	})
 }
 
-export const getUserReviews = async (id: string) => {
+export const getUserReviews = async (id: string, page: number, limit: number) => {
 	return new Promise<Review[]>((resolve, reject) => {
-		fetch(PREFIX + `/user/${id}/reviews`, {
+		fetch(PREFIX + `/user/${id}/reviews?page=${page}&limit=${limit}`, {
 			method: 'GET',
 			headers
 		})
@@ -174,6 +174,22 @@ export const updateUser = async (update: UserUpdate) => {
 export const deleteAccount = async () => {
 	return new Promise<void>((resolve, reject) => {
 		fetch(PREFIX + '/user/delete-account', {
+			method: 'GET',
+			headers
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}
+
+export const getProfile = async (id: string) => {
+	return new Promise<User>((resolve, reject) => {
+		fetch(PREFIX + `/user/${id}/profile`, {
 			method: 'GET',
 			headers
 		})

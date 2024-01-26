@@ -50,15 +50,17 @@
 </script>
 
 <div class="card has-background-dark">
-	<div class="card-image">
-		<figure class="image is-4by3">
-			<Base64Image
-				imageData={user.profile_picture}
-				alt={user.username}
-				style="object-fit: contain;"
-			/>
-		</figure>
-	</div>
+	<a href={`/profile/${user._id}`}>
+		<div class="card-image">
+			<figure class="image is-4by3">
+				<Base64Image
+					imageData={user.profile_picture}
+					alt={user.username}
+					style="object-fit: contain;"
+				/>
+			</figure>
+		</div>
+	</a>
 	<div class="card-content">
 		<p class="card-title has-text-white">{user.username}</p>
 
@@ -120,7 +122,6 @@
 		width: 300px; /* Adjust as needed */
 		display: flex;
 		flex-direction: column;
-		cursor: pointer;
 	}
 
 	.card-title {
