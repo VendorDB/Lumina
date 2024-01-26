@@ -186,3 +186,19 @@ export const deleteAccount = async () => {
 			})
 	})
 }
+
+export const getProfile = async (id: string) => {
+	return new Promise<User>((resolve, reject) => {
+		fetch(PREFIX + `/user/${id}/profile`, {
+			method: 'GET',
+			headers
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}

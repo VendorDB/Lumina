@@ -151,3 +151,11 @@ table {
 .vendor-page .country-indicator {
 	background-color: $grey-darker;
 }
+
+.vendor-indicator {
+	background-color: $grey;
+}
+
+.vendor-indicator-link, .vendor-indicator-link:hover {
+	color: $light;
+}
