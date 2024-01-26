@@ -30,7 +30,7 @@
 	}
 </script>
 
-<div class="stars" role="button" tabindex="0" on:mouseleave={() => (previewStars = selectedStars)}>
+<div class="stars star-selector-desktop" role="button" tabindex="0" on:mouseleave={() => (previewStars = selectedStars)}>
 	{#each Array.from({ length: 5 }) as _, i}
 		{#if i < previewStars}
 			<span
@@ -58,9 +58,38 @@
 	{/each}
 </div>
 
+<div class="star-selector-mobile">
+	<label for="star-select" style="font-size:x-large"><i class="fas fa-star has-text-warning" /></label>
+	<div class="select is-primary">
+		<select id="star-select" bind:value={selectedStars}>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+		</select>
+	</div>
+</div>
+
+
 <style>
 	.icon {
 		margin-right: 5px;
 		cursor: pointer;
 	}
+
+	.star-selector-mobile {
+		display: none;
+	}
+
+	@media only screen and (max-width: 800px) {
+		.star-selector-mobile {
+			display: inline-block;
+		}
+
+		.star-selector-desktop {
+			display: none;
+		}
+	}
+
 </style>
