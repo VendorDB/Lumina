@@ -138,9 +138,9 @@ export const getProfilePicture = async (id: string) => {
 	})
 }
 
-export const getUserReviews = async (id: string) => {
+export const getUserReviews = async (id: string, page: number, limit: number) => {
 	return new Promise<Review[]>((resolve, reject) => {
-		fetch(PREFIX + `/user/${id}/reviews`, {
+		fetch(PREFIX + `/user/${id}/reviews?page=${page}&limit=${limit}`, {
 			method: 'GET',
 			headers
 		})

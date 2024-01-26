@@ -20,17 +20,32 @@
 	import { getProfile, getUserReviews } from '$api/user';
 	import { onMount } from 'svelte';
 	import ReviewCard from '$lib/components/ReviewCard.svelte';
-	import { user } from '$lib/stores';
 
 	export let data;
 
 	let profile: User;
-	let reviews: Review[];
+	let reviews: Review[] = [];
+
+	let page = 1
+	let limit = 25
 
 	onMount(async () => {
 		profile = await getProfile(data.id);
-		reviews = await getUserReviews(data.id);
+		await loadReviews()
+
+		window.addEventListener('scroll', function () {
+			if (window.innerHeight + Math.round(window.scrollY) >= document.body.offsetHeight) {
+				loadReviews()
+			}
+		});
 	});
+
+	async function loadReviews() {
+		const newReviews = await getUserReviews(data.id, page, limit)
+		if(!newReviews)return
+		reviews = reviews.concat(newReviews)
+		page += 1
+	}
 </script>
 
 <main class="container has-text-centered">
