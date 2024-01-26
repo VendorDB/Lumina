@@ -35,21 +35,18 @@
 
 	let paginator: Paginator;
 
-	let loading = true
+	let loading = true;
 
 	onMount(() => {
 		update();
 	});
 
 	async function update() {
-		getVendors(filter, page, limit).then((result) => {
+		await getVendors(filter, page, limit).then((result) => {
 			vendors = result.vendors;
 			totalPages = result.totalPages;
 			totalCount = result.totalCount;
-			loading = false
-			if(paginator) {
-				paginator.setPages(totalPages)
-			}
+			loading = false;
 		});
 	}
 
@@ -58,9 +55,11 @@
 		update();
 	}
 
-	function handleFiltersApplied(event: any) {
+	async function handleFiltersApplied(event: any) {
 		filter = event.detail;
-		update();
+		await update();
+		paginator.setPages(totalPages);
+		paginator.goToPage(1);
 	}
 </script>
 

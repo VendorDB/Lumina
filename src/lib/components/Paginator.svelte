@@ -30,7 +30,7 @@
 		pageNumbers = getPageRange();
 	};
 
-	function goToPage(newPage: number) {
+	export const goToPage = (newPage: number) => {
 		if(newPage > totalPages || newPage < 1)return
 		page = newPage;
 		dispatch('switch', {
