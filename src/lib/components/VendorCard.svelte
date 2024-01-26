@@ -92,5 +92,6 @@
 		right: 1rem;
 		z-index: 1;
 		font-size: xx-large;
+		text-shadow: 5px 4px 5px rgba(0, 0, 0, 0.747);
 	}
 </style>
