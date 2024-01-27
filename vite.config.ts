@@ -7,6 +7,7 @@ export default defineConfig({
 
 	resolve: {
 		alias: {
+			$src: path.resolve('./src'),
 			$lib: path.resolve('./src/lib'),
 			$api: path.resolve('./src/lib/api'),
 			$util: path.resolve('./src/lib/util')

@@ -33,6 +33,8 @@
 	export let review: Review;
 	export let displayOnly = false;
 	export let displayVendor = false;
+	export let style = "";
+	export let embedded = false;
 
 	let profilePicture: string;
 	let vendor: Vendor;
@@ -49,7 +51,12 @@
 
 	function formatDate(timestamp: number) {
 		const date = new Date(timestamp);
-		return date.toLocaleString();
+		return date.toLocaleDateString();
+	}
+
+	function formatTime(timestamp: number) {
+		const date = new Date(timestamp);
+		return date.toLocaleTimeString();
 	}
 
 	function like() {
@@ -61,10 +68,10 @@
 	}
 </script>
 
-<div class="review">
+<div class="review" {style}>
 	{#if review}
 		<div class="review-header">
-			<a href={`/profile/${review.author._id}`}>
+			<a href={`/profile/${review.author._id}`} target={embedded ? '_blank' : ''}>
 				<div>
 					<Base64Image
 						imageData={profilePicture}
@@ -76,10 +83,11 @@
 			</a>
 			<StarsDisplay stars={review.stars} />
 			<div>
-				{formatDate(review.created)}
+				{formatDate(review.created)} <br>
+				{formatTime(review.created)}
 			</div>
 			{#if !displayOnly}
-				<div style="margin-top: 0.5rem;">
+				<div style="margin-top: 0.5rem;display:flex;">
 					{#if !$user || review.author._id == $user._id || review.likes.includes($user._id)}
 						<button class="button is-danger"
 							><i class="fa-solid fa-heart" />&nbsp;{review.likeAmount
@@ -95,6 +103,7 @@
 					{/if}
 
 					{#if $user}
+						<span style="margin-left: 0.5rem;" />
 						{#if $user.perms >= 1}
 							<button
 								class="button is-danger"
@@ -118,7 +127,7 @@
 		<span class="divider" />
 		<div class="review-content">
 			{#if displayVendor && vendor}
-				<a href={`/vendors/${vendor._id}`} class="vendor-indicator-link">
+				<a href={`/vendors/${vendor._id}`} class="vendor-indicator-link" target={embedded ? '_blank' : ''}>
 					<div class="vendor-indicator">
 						<Base64Image imageData={vendor.logo} alt="Logo" style="width: 1rem;" />
 						{vendor.name}
