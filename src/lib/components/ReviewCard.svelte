@@ -33,7 +33,7 @@
 	export let review: Review;
 	export let displayOnly = false;
 	export let displayVendor = false;
-	export let style = "";
+	export let style = '';
 	export let embedded = false;
 
 	let profilePicture: string;
@@ -83,24 +83,26 @@
 			</a>
 			<StarsDisplay stars={review.stars} />
 			<div>
-				{formatDate(review.created)} <br>
+				{formatDate(review.created)} <br />
 				{formatTime(review.created)}
 			</div>
 			{#if !displayOnly}
 				<div style="margin-top: 0.5rem;display:flex;">
-					{#if !$user || review.author._id == $user._id || review.likes.includes($user._id)}
-						<button class="button is-danger"
-							><i class="fa-solid fa-heart" />&nbsp;{review.likeAmount
-								? abbreviateNumber(review.likeAmount, 2)
-								: 0}</button
-						>
-					{:else}
-						<button class="button is-danger is-outlined" on:click={like}
-							><i class="fa-regular fa-heart" />&nbsp;{review.likeAmount
-								? abbreviateNumber(review.likeAmount, 2)
-								: 0}</button
-						>
-					{/if}
+					<div style="flex-grow: 1">
+						{#if !$user || review.author._id == $user._id || review.likes.includes($user._id)}
+							<button class="button is-danger"
+								><i class="fa-solid fa-heart" />&nbsp;{review.likeAmount
+									? abbreviateNumber(review.likeAmount, 2)
+									: 0}</button
+							>
+						{:else}
+							<button class="button is-danger is-outlined" on:click={like}
+								><i class="fa-regular fa-heart" />&nbsp;{review.likeAmount
+									? abbreviateNumber(review.likeAmount, 2)
+									: 0}</button
+							>
+						{/if}
+					</div>
 
 					{#if $user}
 						<span style="margin-left: 0.5rem;" />
@@ -127,7 +129,11 @@
 		<span class="divider" />
 		<div class="review-content">
 			{#if displayVendor && vendor}
-				<a href={`/vendors/${vendor._id}`} class="vendor-indicator-link" target={embedded ? '_blank' : ''}>
+				<a
+					href={`/vendors/${vendor._id}`}
+					class="vendor-indicator-link"
+					target={embedded ? '_blank' : ''}
+				>
 					<div class="vendor-indicator">
 						<Base64Image imageData={vendor.logo} alt="Logo" style="width: 1rem;" />
 						{vendor.name}
@@ -196,6 +202,10 @@
 	.review-content {
 		overflow-wrap: break-word;
 		width: 100%;
+	}
+
+	.review-header {
+		min-width: 8rem;
 	}
 
 	.divider {
