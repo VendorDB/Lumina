@@ -15,10 +15,4 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<script lang="ts">
-	import '$src/app.scss';
-	import '@fortawesome/fontawesome-free/css/all.min.css';
-	import '@fontsource/port-lligat-slab';
-</script>
-
 <slot />

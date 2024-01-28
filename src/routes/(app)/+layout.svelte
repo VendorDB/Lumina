@@ -1,5 +1,5 @@
 <!--
- Copyright (C) 2024 Marcus Huber (xenorio) <dev@xenorio.xyz>
+ Copyright (C) 2023 Marcus Huber (xenorio) <dev@xenorio.xyz>
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as
@@ -15,10 +15,25 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<script lang="ts">
-	import '$src/app.scss';
-	import '@fortawesome/fontawesome-free/css/all.min.css';
-	import '@fontsource/port-lligat-slab';
+<script>
+	import Navbar from '$lib/components/Navbar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+
+	import { fetchMe } from '$api/user';
+	import { user } from '$lib/stores';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		if (!$user) {
+			fetchMe().then((data) => {
+				user.set(data);
+			});
+		}
+	});
 </script>
 
+<Navbar />
+
 <slot />
+
+<Footer />
