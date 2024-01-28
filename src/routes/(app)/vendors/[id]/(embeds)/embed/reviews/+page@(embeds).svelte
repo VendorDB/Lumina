@@ -66,7 +66,7 @@
 	}
 
 	function previous() {
-		if (index - 1 == 0) {
+		if (index - 1 < 0) {
 			index = reviews.length - 1;
 		} else {
 			index -= 1;
