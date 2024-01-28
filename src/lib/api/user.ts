@@ -202,3 +202,19 @@ export const getProfile = async (id: string) => {
 			})
 	})
 }
+
+export const genAPIKey = async () => {
+	return new Promise<{status: string;token: string;}>((resolve, reject) => {
+		fetch(PREFIX + `/user/keygen`, {
+			method: 'GET',
+			headers
+		})
+			.then(async res => {
+				if (res.status == 200) {
+					resolve(await res.json())
+				} else {
+					reject(await res.json())
+				}
+			})
+	})
+}

@@ -20,7 +20,7 @@
 	import Modal from '$lib/components/Modal.svelte';
 	import QRCode from '$lib/components/QRCode.svelte';
 	import { totpGenSecret, totpVerify, totpSet, totpDisable } from '$api/totp';
-	import { fetchMe } from '$api/user';
+	import { fetchMe, genAPIKey } from '$api/user';
 
 	let currentPassword: string;
 	let newPassword: string;
@@ -32,6 +32,11 @@
 	let totpSecret: string;
 	let totpToken: string;
 	let totpUrl: string;
+
+	let keyConfirmModal: Modal;
+	let keyModal: Modal;
+	let apiKey: string;
+	let keyDisplay: HTMLInputElement;
 
 	function changePassword() {
 		if (newPassword != newPasswordConfirm) {
@@ -134,8 +139,49 @@
 				<button class="button is-primary" on:click={enableTotp}>Enable 2FA</button>
 			{/if}
 		</div>
+
+		<div class="section security-settings-section">
+			<h1 class="title">API Key</h1>
+
+			<button class="button is-primary" on:click={keyConfirmModal.open}>Generate new API key</button
+			>
+		</div>
 	{/if}
 </main>
+
+<Modal
+	title="Generate API Key"
+	bind:this={keyConfirmModal}
+	buttons={['cancel', 'confirm']}
+	on:buttonClick={async (event) => {
+		if (event.detail == 'confirm') {
+			apiKey = (await genAPIKey()).token;
+			keyModal.open();
+		}
+	}}
+>
+	Are you sure you want to generate a new API key? Any previous key will be invalidated!
+</Modal>
+
+<Modal
+	title="API Key"
+	bind:this={keyModal}
+	buttons={['ok']}
+	on:buttonClick={() => {
+		apiKey = '';
+	}}
+>
+	Here's your new API key:
+	<div style="margin-top: 0.5rem;margin-bottom: 0.5rem;display: flex;">
+		<input bind:this={keyDisplay} class="input is-danger" type="text" readonly value={apiKey} />
+		<button style="margin-left: 0.5rem;" class="button is-primary" title="Copy" on:click={() => {
+			keyDisplay.select()
+			keyDisplay.setSelectionRange(0, 99999)
+			navigator.clipboard.writeText(apiKey)
+		}}><i class="fa-solid fa-copy" /></button>
+	</div>
+	<strong>DO NOT SHARE THIS WITH ANYONE!</strong>
+</Modal>
 
 <Modal
 	bind:this={totpModal}
