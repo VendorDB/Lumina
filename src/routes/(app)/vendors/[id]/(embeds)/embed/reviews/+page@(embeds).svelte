@@ -82,7 +82,7 @@
 			</div>
 		{/if}
 		<ReviewCard
-			style="border-radius: 0;margin-bottom: 0;"
+			style="border-radius: 0;margin-bottom: 0;height:100vh;"
 			displayVendor
 			displayOnly
 			embedded
