@@ -20,6 +20,7 @@
 	import { getReviews } from '$api/review';
 	import { onMount } from 'svelte';
 	import ReviewCard from '$src/lib/components/ReviewCard.svelte';
+	import LoadingBar from '$src/lib/components/LoadingBar.svelte';
 
 	export let data;
 
@@ -73,8 +74,8 @@
 	}
 </script>
 
-<div id="wrapper" class="has-text-centered">
-	{#if reviews[0]}
+{#if reviews[0]}
+	<div id="wrapper" class="has-text-centered">
 		{#if controls}
 			<div class="navbutton" on:click={previous} on:keypress={previous} role="button" tabindex="0">
 				<i class="fa-solid fa-arrow-left" />
@@ -92,8 +93,12 @@
 				<i class="fa-solid fa-arrow-right" />
 			</div>
 		{/if}
-	{/if}
-</div>
+	</div>
+{:else}
+	<div style="padding: 1rem;">
+		<LoadingBar />
+	</div>
+{/if}
 
 <style>
 	#wrapper {
