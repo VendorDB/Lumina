@@ -59,7 +59,6 @@
 	.card {
 		display: flex;
 		flex-direction: column;
-		cursor: pointer;
 		color: white;
 	}
 
