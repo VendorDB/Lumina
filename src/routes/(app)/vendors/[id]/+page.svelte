@@ -142,8 +142,9 @@
 			<h2 class="subtitle" style="margin-bottom: 0;">{vendor.description}</h2>
 
 			{#if vendor.country}
-				<div style="margin-top: 1rem; margin-bottom: 1rem;" class="country-indicator"
-					>{vendor.country.label}</div>
+				<div style="margin-top: 1rem; margin-bottom: 1rem;" class="country-indicator">
+					{vendor.country.label}
+				</div>
 			{:else}
 				<div style="margin-bottom: 1rem;" />
 			{/if}
@@ -183,7 +184,10 @@
 				</div>
 			{/if}
 
-			<strong>Average ({reviewAverage || 0})</strong>
+			<strong
+				>Average ({reviewAverage || 0}) out of {vendor.reviewAmount}
+				{vendor.reviewAmount == 1 ? 'review' : 'reviews'}</strong
+			>
 
 			<StarsDisplay stars={vendor.stars / vendor.reviewAmount} />
 
