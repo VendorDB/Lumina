@@ -140,7 +140,7 @@
 					</div>
 				</a>
 			{/if}
-			<textarea readonly rows="10">{review.message}</textarea>
+			<textarea readonly>{review.message}</textarea>
 		</div>
 	{/if}
 </div>
