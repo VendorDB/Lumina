@@ -16,3 +16,11 @@
 -->
 
 <slot />
+
+<style>
+	:global(#app, body, html) {
+        min-height: auto;
+		margin: 0;
+		padding-bottom: 0;
+    }
+</style>
