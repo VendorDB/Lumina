@@ -14,6 +14,13 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
+
+<script lang="ts">
+	import VerifiedIndicator from "$lib/components/review-indicators/VerifiedIndicator.svelte";
+	import StaffIndicator from "$src/lib/components/review-indicators/StaffIndicator.svelte";
+	import NewUserIndicator from "$src/lib/components/review-indicators/NewUserIndicator.svelte";
+</script>
+
 <main class="container has-text-centered">
 	<h1 class="title">Frequently Asked Questions</h1>
 
@@ -72,6 +79,38 @@
 		Yes, but also no. Currently, the only way for you to delete reviews is to delete your entire account
 		(which deletes all your reviews as well). However, we're still not sure if we will be keeping it
 		this way.
+	</div>
+
+	<div class="faq-question" id="review-indicators">
+		<h2 class="subtitle">What do the symbols next to reviews mean?</h2>
+		<table class="table is-bordered">
+			<tbody>
+				<tr>
+					<td>
+						<VerifiedIndicator />
+					</td>
+					<td>
+						This review is connected to a verified purchase
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<StaffIndicator />
+					</td>
+					<td>
+						This review was written by VendorDB staff
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<NewUserIndicator />
+					</td>
+					<td>
+						The author of this review registered their account less than 7 days ago
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </main>
 

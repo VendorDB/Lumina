@@ -19,7 +19,7 @@
 	import StarsDisplay from './StarsDisplay.svelte';
 	import Base64Image from './Base64Image.svelte';
 	import { createEventDispatcher, onMount } from 'svelte';
-	import { getProfilePicture } from '$api/user';
+	import { getProfile } from '$api/user';
 	import { user } from '$lib/stores';
 	import { likeReview, reportReview } from '$api/review';
 	import { getVendor } from '$api/vendor';
@@ -27,6 +27,10 @@
 	import { deleteReview } from '$api/moderator/review';
 	import Modal from './Modal.svelte';
 	import ReviewCard from './ReviewCard.svelte';
+	import VerifiedIndicator from './review-indicators/VerifiedIndicator.svelte';
+	import StaffIndicator from './review-indicators/StaffIndicator.svelte';
+	import NewUserIndicator from './review-indicators/NewUserIndicator.svelte';
+	import ms from 'ms';
 
 	const dispatch = createEventDispatcher();
 
@@ -36,14 +40,14 @@
 	export let style = '';
 	export let embedded = false;
 
-	let profilePicture: string;
+	let author: User;
 	let vendor: Vendor;
 
 	let deleteConfirmModal: Modal;
 	let reportConfirmModal: Modal;
 
 	onMount(async () => {
-		profilePicture = (await getProfilePicture(review.author._id)).picture;
+		author = await getProfile(review.author._id);
 		if (displayVendor) {
 			vendor = await getVendor(review.vendor);
 		}
@@ -69,17 +73,17 @@
 </script>
 
 <div class="review" {style}>
-	{#if review}
+	{#if review && author}
 		<div class="review-header">
-			<a href={`/profile/${review.author._id}`} target={embedded ? '_blank' : ''}>
+			<a href={`/profile/${author._id}`} target={embedded ? '_blank' : ''}>
 				<div>
 					<Base64Image
-						imageData={profilePicture}
+						imageData={author.profile_picture}
 						alt="Profile Picture"
 						style="width: 2rem; border-radius: 25px;"
 					/>
 				</div>
-				{review.author.username}
+				{author.username}
 			</a>
 			<StarsDisplay stars={review.stars} />
 			<div>
@@ -141,6 +145,18 @@
 				</a>
 			{/if}
 			<textarea readonly>{review.message}</textarea>
+
+			<div class="review-indicators">
+				{#if review.verified}
+					<VerifiedIndicator />
+				{/if}
+				{#if author.perms > 0}
+					<StaffIndicator />
+				{/if}
+				{#if author.created > Date.now() - ms('7d')}
+					<NewUserIndicator />
+				{/if}
+			</div>
 		</div>
 	{/if}
 </div>
@@ -202,6 +218,8 @@
 	.review-content {
 		overflow-wrap: break-word;
 		width: 100%;
+		display: flex;
+		position: relative;
 	}
 
 	.review-header {
@@ -220,6 +238,7 @@
 		resize: none;
 		width: 100%;
 		padding: 0.5rem;
+		flex-grow: 1;
 	}
 
 	@media only screen and (max-width: 600px) {
