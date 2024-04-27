@@ -31,6 +31,7 @@
 	let totpQr: QRCode;
 	let totpSecret: string;
 	let totpToken: string;
+	let totpTokenInput: HTMLInputElement;
 	let totpUrl: string;
 
 	let keyConfirmModal: Modal;
@@ -64,10 +65,14 @@
 			totpUrl = data.uri;
 			totpQr.set(totpUrl);
 			totpModal.open();
+			totpTokenInput.focus()
 		});
 	}
 
 	function verifyTotp() {
+
+		totpModal.close()
+
 		if (!totpToken || totpToken.length < 6) {
 			alert('Invalid Token');
 			totpToken = '';
@@ -204,17 +209,20 @@
 	</ul>
 	<QRCode bind:this={totpQr} />
 
-	<div>
-		<label for="totp-code">Enter your 2FA Code</label>
-		<input
-			bind:value={totpToken}
-			id="totp-code"
-			type="text"
-			class="input"
-			placeholder="123456"
-			max="6"
-		/>
-	</div>
+	<form on:submit={() => verifyTotp()}>
+		<div>
+			<label for="totp-code">Enter your 2FA Code</label>
+			<input
+				bind:this={totpTokenInput}
+				bind:value={totpToken}
+				id="totp-code"
+				type="text"
+				class="input"
+				placeholder="123456"
+				max="6"
+			/>
+		</div>
+	</form>
 </Modal>
 
 <Modal

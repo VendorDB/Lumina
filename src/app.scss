@@ -22,11 +22,12 @@
 @import 'bulma/sass/helpers/_all';
 @import 'bulma/sass/layout/_all';
 
-html, body {
-    background-color: $black-ter;
-    color: $light;
-    margin: 0;
-    min-height: 100vh;
+html,
+body {
+	background-color: $black-ter;
+	color: $light;
+	margin: 0;
+	min-height: 100vh;
 }
 
 a:hover {
@@ -53,29 +54,33 @@ a:hover {
 }
 
 #app {
-    min-height: 100vh;
-    position: relative;
-    padding-bottom: 5rem;
+	min-height: 100vh;
+	position: relative;
+	padding-bottom: 5rem;
 }
 
 strong {
-    color: $light;
+	color: $light;
 }
 
-.title, .subtitle, h1, h2, h3 {
-    color: $grey-lighter;
+.title,
+.subtitle,
+h1,
+h2,
+h3 {
+	color: $grey-lighter;
 }
 
 main {
-    padding: 3rem;
+	padding: 3rem;
 }
 
 .label {
-    color: $light;
+	color: $light;
 }
 
 .input::placeholder {
-    color: $black-ter;
+	color: $black-ter;
 }
 
 .invisible {
@@ -122,7 +127,7 @@ table {
 }
 
 .modal-card-head,
-.modal-card-title, 
+.modal-card-title,
 .modal-card-body,
 .modal-card-foot {
 	background-color: $grey-darker;
@@ -156,6 +161,29 @@ table {
 	background-color: $grey;
 }
 
-.vendor-indicator-link, .vendor-indicator-link:hover {
+.vendor-indicator-link,
+.vendor-indicator-link:hover {
 	color: $light;
+}
+
+table,
+th,
+td {
+	color: $light;
+	background-color: $grey-darker;
+}
+
+.review-indicator {
+	padding: 0.5rem;
+	border-radius: 25px;
+	width: 3rem;
+}
+
+.review-indicators .review-indicator {
+	margin-bottom: 0.5rem;
+}
+
+.button.is-primary,
+.button.is-primary:hover {
+	color: black;
 }

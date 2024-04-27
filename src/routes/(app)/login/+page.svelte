@@ -24,6 +24,7 @@
 	let email = '';
 	let password = '';
 	let totpToken: string | undefined;
+	let totpTokenInput: HTMLInputElement;
 	let totpModal: Modal;
 
 	function submit() {
@@ -35,6 +36,7 @@
 			.catch((err) => {
 				if (err.error == 'TOTP_REQUIRED') {
 					totpModal.open();
+					totpTokenInput.focus()
 				} else {
 					alert(err.message);
 				}
@@ -93,6 +95,7 @@
 	<h1 class="title">Enter your 2FA Code</h1>
 	<form on:submit={submit}>
 		<input
+			bind:this={totpTokenInput}
 			bind:value={totpToken}
 			id="totp-code"
 			type="text"

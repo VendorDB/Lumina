@@ -66,7 +66,7 @@
 	}
 
 	function previous() {
-		if (index - 1 == 0) {
+		if (index - 1 < 0) {
 			index = reviews.length - 1;
 		} else {
 			index -= 1;
@@ -82,7 +82,7 @@
 			</div>
 		{/if}
 		<ReviewCard
-			style="border-radius: 0;margin-bottom: 0;"
+			style="border-radius: 0;margin-bottom: 0;height:100vh;"
 			displayVendor
 			displayOnly
 			embedded

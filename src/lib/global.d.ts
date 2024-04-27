@@ -24,6 +24,7 @@ declare global {
 		profile_picture: string;
 		about: string;
 		totpEnabled?: boolean;
+		created: number;
     }
 
     interface SignupValidator {
@@ -80,6 +81,7 @@ declare global {
 		likes: string[];
 		likeAmount: number;
 		vendor: string;
+		verified: boolean;
 	}
 
 	interface UserUpdate {

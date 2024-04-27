@@ -38,40 +38,47 @@
 </script>
 
 {#if vendor}
-	<div class="card has-text-centered has-background-dark">
-		<div class="card-image">
-			<Base64Image imageData={vendor.logo} alt="Logo" style="width: 5rem;" />
-		</div>
-		<div class="card-content">
-			<p class="card-title">{vendor.name}</p>
-			<StarsDisplay stars={vendor.stars / vendor.reviewAmount} />
-			<div style="margin-bottom: 0.5rem;">
-				{averageStars} stars from {vendor.reviewAmount} {vendor.reviewAmount == 1 ? 'review' : 'reviews'}
+	<div class="wrapper has-background-dark">
+		<div class="center">
+			<div class="image">
+				<Base64Image imageData={vendor.logo} alt="Logo" style="width: 5rem;display:inline-block" />
 			</div>
-			<a href={`/vendors/${vendor._id}`} target="_blank">
-				<button class="button is-primary">View on VendorDB&nbsp;<i class="fa-solid fa-up-right-from-square" /></button>
-			</a>
+			<div class="content">
+				<span class="title">{vendor.name}</span>
+				<StarsDisplay stars={vendor.stars / vendor.reviewAmount} />
+				<div style="margin-bottom: 0.5rem;">
+					{averageStars} stars from {vendor.reviewAmount} {vendor.reviewAmount == 1 ? 'review' : 'reviews'}
+				</div>
+				<a href={`/vendors/${vendor._id}`} target="_blank">
+					<button class="button is-primary">View on VendorDB&nbsp;<i class="fa-solid fa-up-right-from-square" /></button>
+				</a>
+			</div>
 		</div>
 	</div>
 {/if}
 
 <style>
-	.card {
+	.wrapper {
 		display: flex;
 		flex-direction: column;
 		color: white;
+		height: 100vh;
+		width: 100vw;
+		justify-content: center;
+		text-align: center;
 	}
 
-	.card-content {
+	.content {
 		padding: 0;
 		margin-bottom: 1rem;
 	}
 
-	.card-title {
+	.title {
 		font-size: 1.25rem;
 		max-width: 100%; /* Allow the title to expand */
 		overflow: hidden;
 		white-space: nowrap; /* Prevent line breaks */
 		text-overflow: ellipsis; /* Show ellipsis (...) if text overflows */
+		margin-bottom: 0.5rem;
 	}
 </style>
