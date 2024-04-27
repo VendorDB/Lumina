@@ -184,6 +184,8 @@ td {
 }
 
 .button.is-primary,
-.button.is-primary:hover {
+.button.is-primary:hover,
+.button.is-success,
+.button.is-success:hover {
 	color: black;
 }
